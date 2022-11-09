@@ -1,0 +1,28 @@
+.box {
+    margin: 10px;
+    border: 1.5px solid #02796e;
+    border-radius: 15px;
+}
+
+.box h4 {
+    padding: 12px 24px;
+}
+
+span {
+    font-weight: bold;
+}
+
+.pass {
+    color: green;
+}
+
+.failed {
+    color: red;
+    background: none !important;
+}
+
+.content-install {
+    padding: 0 20px 20px 20px;
+    padding-left: 30px;
+    font-size: 16px;
+}
