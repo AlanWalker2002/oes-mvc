@@ -256,12 +256,22 @@ function submit_add_admin(data) {
         if (json_data.status) {
             $('#table_admins').DataTable().destroy();
             get_list_admins();
+            resetValueInput();
 
             $('#add_normal').modal('hide');
             toastr.success(json_data.status_value, 'Success');
         }
     };
     $.post(url, data, success);
+}
+
+function resetValueInput() {
+    $('#name').val('');
+    $('#email').val('');
+    $('#username').val('');
+    $('#birthday').val('');
+    $('#password').val('');
+    $('gender_id').val('');
 }
 
 function submit_add_admin_via_file() {

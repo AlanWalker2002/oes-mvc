@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8" />
 	<title>
-		Analytics Dashboard | Hyper - Responsive Bootstrap 5 Admin Dashboard
+		Hệ Thống Thi Trực Tuyến | <?php echo $title ?>
 	</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
@@ -24,7 +24,7 @@
 	<link href="public/css/vendor/responsive.bootstrap5.css" rel="stylesheet" type="text/css">
 	<script src="https://code.jquery.com/jquery-3.6.1.slim.js" integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk=" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-	<link rel="stylesheet" type="text/css" href="vendors/dropify/css/dropify.min.css">
+	<link rel="stylesheet" type="text/css" href="public/css/vendor/dropify.min.css">
 	<script src="public/js/admin_functions.js"></script>
 	<script src="vendors/ckeditor/ckeditor.js"></script>
 
@@ -58,9 +58,7 @@
 </head>
 
 <body class="loading" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
-	<!--*******************
-        Preloader start
-    ********************-->
+	<!-- === Preloader start === -->
 	<div id="preloader">
 		<div class="lds-ripple">
 			<div></div>
@@ -68,8 +66,7 @@
 		</div>
 	</div>
 
-	<!--*******************
-    Preloader end
-********************-->
+	<!-- === Preloader end === -->
+
 	<!-- Begin page -->
 	<div class="wrapper">

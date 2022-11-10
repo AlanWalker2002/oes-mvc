@@ -8,11 +8,6 @@ $(function () {
         $('#add_grade_form')[0].reset();
     });
 
-    $('#add_grade_via_file').on('submit', function () {
-        submit_add_grade_via_file();
-        $('#add_grade_via_file')[0].reset();
-    });
-
     $('#select_all').on('change', function () {
         if (this.checked) {
             $('.checkbox').each(function () {
@@ -225,43 +220,6 @@ function submit_add_grade(data) {
         }
     };
     $.post(url, data, success);
-}
-
-function submit_add_grade_via_file() {
-    var file_data = $('#input-file-now').prop('files')[0];
-    var type = file_data.type;
-    var size = file_data.size;
-    var match = [
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        'application/vnd.ms-excel',
-    ];
-
-    if (type == match[0] || type == match[1]) {
-        var form_data = new FormData();
-        form_data.append('file', file_data);
-        $.ajax({
-            url: 'index.php?action=check_add_grade_via_file',
-            dataType: 'text',
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: form_data,
-            type: 'post',
-            success: function (result) {
-                var json_data = $.parseJSON(result);
-                show_status(json_data);
-                $('#table_grades').DataTable().destroy();
-                get_list_grades();
-                $('#_add_via_file').modal('hide');
-                toastr.success(json_data.status_value, 'Success');
-            },
-        });
-    } else {
-        toastr.errpr(
-            'Sai định dạng mẫu, yêu cầu file excel đuôi .xlsx theo mẫu. Nếu file lỗi vui lòng tải lại mẫu và điền lại.',
-            'Error'
-        );
-    }
 }
 
 function submit_del_grade(data) {

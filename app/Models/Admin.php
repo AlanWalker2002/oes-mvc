@@ -403,7 +403,8 @@ class Admin extends Database
 
     public function add_test($test_code, $test_name, $password, $total_questions, $time_to_do, $note, $grade_id, $subject_id)
     {
-        $sql = "INSERT INTO tests (test_code,test_name,password,total_questions,time_to_do,note,grade_id,subject_id,status_id) VALUES ($test_code, '$test_name', '$password', $total_questions, $time_to_do, '$note', $grade_id, $subject_id, 2)";
+
+        $sql = "INSERT INTO tests (`test_code`, `test_name`, `password`, `total_questions`, `time_to_do`, `note`, `grade_id`, `subject_id`, `status_id`) VALUES ('$test_code','$test_name','$password','$total_questions','$time_to_do','$note','$grade_id','$subject_id',2)";
         $this->set_query($sql);
         return $this->execute_return_status();
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 09, 2022 lúc 07:04 AM
+-- Thời gian đã tạo: Th10 10, 2022 lúc 01:44 PM
 -- Phiên bản máy phục vụ: 10.4.24-MariaDB
 -- Phiên bản PHP: 7.4.29
 
@@ -39,13 +39,6 @@ CREATE TABLE `admins` (
   `avatar` varchar(255) DEFAULT 'avatar-default.jpg',
   `birthday` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Đang đổ dữ liệu cho bảng `admins`
---
-
-INSERT INTO `admins` (`id`, `username`, `email`, `password`, `name`, `permission_id`, `last_login`, `gender_id`, `avatar`, `birthday`) VALUES
-(1, 'admin', 'admin@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'admin', 1, '2022-11-09 13:00:07', 2, 'avatar-default.jpg', '2022-10-12');
 
 -- --------------------------------------------------------
 
@@ -168,6 +161,15 @@ CREATE TABLE `statuses` (
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `statuses`
+--
+
+INSERT INTO `statuses` (`id`, `name`) VALUES
+(1, 'Mở'),
+(2, 'Đóng'),
+(3, 'Chờ Đóng');
+
 -- --------------------------------------------------------
 
 --
@@ -234,7 +236,7 @@ CREATE TABLE `teachers` (
   `password` varchar(32) NOT NULL,
   `name` varchar(50) NOT NULL,
   `birthday` date NOT NULL,
-  `avatar` varchar(255) DEFAULT '''avatar-default.jpg''',
+  `avatar` varchar(255) DEFAULT 'avatar-default.jpg',
   `gender_id` int(1) NOT NULL DEFAULT 1,
   `permission_id` int(1) DEFAULT 2,
   `last_login` datetime NOT NULL
@@ -252,11 +254,11 @@ CREATE TABLE `tests` (
   `password` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `total_questions` int(11) NOT NULL,
   `time_to_do` int(11) NOT NULL,
-  `note` text COLLATE utf8_unicode_ci NOT NULL,
+  `note` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `timest` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `grade_id` int(11) NOT NULL,
-  `subject_id` int(11) DEFAULT NULL,
-  `status_id` int(11) DEFAULT NULL
+  `subject_id` int(11) NOT NULL,
+  `status_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -369,8 +371,8 @@ ALTER TABLE `teachers`
 ALTER TABLE `tests`
   ADD PRIMARY KEY (`test_code`),
   ADD KEY `grade_id` (`grade_id`),
-  ADD KEY `status_id` (`status_id`),
-  ADD KEY `subject_id` (`subject_id`);
+  ADD KEY `subject_id` (`subject_id`),
+  ADD KEY `status_id` (`status_id`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -380,7 +382,7 @@ ALTER TABLE `tests`
 -- AUTO_INCREMENT cho bảng `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `classes`
@@ -416,7 +418,7 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT cho bảng `statuses`
 --
 ALTER TABLE `statuses`
-  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `students`
@@ -509,8 +511,8 @@ ALTER TABLE `teachers`
 --
 ALTER TABLE `tests`
   ADD CONSTRAINT `tests_ibfk_1` FOREIGN KEY (`grade_id`) REFERENCES `grades` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `tests_ibfk_2` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `tests_ibfk_3` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `tests_ibfk_2` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `tests_ibfk_3` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

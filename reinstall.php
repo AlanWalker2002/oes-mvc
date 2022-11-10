@@ -85,6 +85,7 @@ class install
 				echo '<span class="failed">Kết nối cơ sở dữ liệu lỗi, vui lòng kiểm tra lại.</span>';
 			else {
 				$this->import_database();
+				$this->connect->query("INSERT INTO admins (name, username, password, email, birthday, gender_id) VALUES ('Admin', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'admin@gmail.com', '2001-11-13', 2)");
 				$this->step_2();
 			}
 		} else {
@@ -135,7 +136,7 @@ class install
 	function import_database()
 	{
 		//database file
-		$filename = 'res/files/oes_db.sql';
+		$filename = 'public/files/oes_db.sql';
 		// Temporary variable, used to store current query
 		$templine = '';
 		// Read in entire file
@@ -162,10 +163,16 @@ class install
 	{
 		//write config file
 		$writer = "<?php
-            return (object) array('host' => '" . $this->connect_info['host'] . "','user' => '" . $this->connect_info['user'] . "','password' => '" . $this->connect_info['password'] . "','dbname' => '" . $this->connect_info['dbname'] . "','INSTALL_MODE' => FALSE);
-        ?>";
+			return (object) array(
+				'host' => '" . $this->connect_info['host'] . "',
+				'user' => '" . $this->connect_info['user'] . "',
+				'password' => '" . $this->connect_info['password'] . "',
+				'dbname' => '" . $this->connect_info['dbname'] . "',
+				'INSTALL_MODE' => FALSE
+			);
+		?>";
 		$write = fopen('config/connect.php', 'w');
-		$a = fwrite($write, $writer);
+		fwrite($write, $writer);
 		fclose($write);
 		chmod('install.php', 0777);
 		rename('install.php', 'reinstall.php');
@@ -183,13 +190,13 @@ class install
 	<meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
 	<meta content="Coderthemes" name="author">
 	<!-- App favicon -->
-	<link rel="shortcut icon" href="res/img/favicon.ico">
+	<link rel="shortcut icon" href="public/img/favicon.ico">
 
 	<!-- App css -->
-	<link href="res/css/icons.min.css" rel="stylesheet" type="text/css">
-	<link href="res/css/app.min.css" rel="stylesheet" type="text/css" id="light-style">
-	<link href="res/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style">
-	<link href="res/css/config.css" rel="stylesheet" type="text/css">
+	<link href="public/css/icons.min.css" rel="stylesheet" type="text/css">
+	<link href="public/css/app.min.css" rel="stylesheet" type="text/css" id="light-style">
+	<link href="public/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style">
+	<link href="public/css/config.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -245,8 +252,8 @@ class install
 	<!-- /End-bar -->
 
 	<!-- bundle -->
-	<script src="res/js/vendor.min.js"></script>
-	<script src="res/js/app.min.js"></script>
+	<script src="public/js/vendor.min.js"></script>
+	<script src="public/js/app.min.js"></script>
 
 </body>
 

@@ -3,7 +3,7 @@
 
 class RAdmin
 {
-    public function show_head()
+    public function show_head($title)
     {
         require_once './config/config.php';
         include 'resources/views/admin/head_left.php';
@@ -85,7 +85,7 @@ class RAdmin
     {
         include 'resources/views/shared/profiles.php';
     }
-    
+
     public function show_404()
     {
         include 'resources/views/shared/404.html';

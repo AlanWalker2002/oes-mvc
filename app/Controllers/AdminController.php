@@ -2,6 +2,7 @@
 
 require_once './app/Models/Admin.php';
 require_once './routes/RAdmin.php';
+require_once './routes/RLogin.php';
 // Load thư viện PhpSpreadSheet
 require './vendors/SpreadSheet/vendor/autoload.php';
 
@@ -28,8 +29,9 @@ class AdminController
     // === DASHBOARD ===
     public function show_dashboard()
     {
+        $title = 'Trang Tổng Quan';
         $route = new RAdmin();
-        $route->show_head();
+        $route->show_head($title);
         $route->show_navbar($this->info);
         $route->show_dashboard($this->get_dashboard_info());
         $route->show_foot();
@@ -38,8 +40,9 @@ class AdminController
     // === ADMIN ===
     public function show_admins_panel()
     {
+        $title = 'Trang Quản Lý Admin';
         $route = new RAdmin();
-        $route->show_head();
+        $route->show_head($title);
         $route->show_navbar($this->info);
         $route->show_admins_panel();
         $route->show_foot();
@@ -48,8 +51,9 @@ class AdminController
     // === TEACHER ===
     public function show_teachers_panel()
     {
+        $title = 'Trang Quản Lý Giáo Viên';
         $route = new RAdmin();
-        $route->show_head();
+        $route->show_head($title);
         $route->show_navbar($this->info);
         $route->show_teachers_panel();
         $route->show_foot();
@@ -58,8 +62,9 @@ class AdminController
     // === GRADE ===
     public function show_grades_panel()
     {
+        $title = 'Trang Quản Lý Khối';
         $route = new RAdmin();
-        $route->show_head();
+        $route->show_head($title);
         $route->show_navbar($this->info);
         $route->show_grades_panel();
         $route->show_foot();
@@ -68,8 +73,9 @@ class AdminController
     // === CLASS ===
     public function show_classes_panel()
     {
+        $title = 'Trang Quản Lý Lớp Học';
         $route = new RAdmin();
-        $route->show_head();
+        $route->show_head($title);
         $route->show_navbar($this->info);
         $route->show_classes_panel();
         $route->show_foot();
@@ -78,8 +84,9 @@ class AdminController
     // === STUDENT ===
     public function show_students_panel()
     {
+        $title = 'Trang Quản Lý Học Sinh';
         $route = new RAdmin();
-        $route->show_head();
+        $route->show_head($title);
         $route->show_navbar($this->info);
         $route->show_students_panel();
         $route->show_foot();
@@ -88,8 +95,9 @@ class AdminController
     // === SUBJECT ===
     public function show_subjects_panel()
     {
+        $title = 'Trang Quản Lý Môn Học';
         $route = new RAdmin();
-        $route->show_head();
+        $route->show_head($title);
         $route->show_navbar($this->info);
         $route->show_subjects_panel();
         $route->show_foot();
@@ -98,8 +106,9 @@ class AdminController
     // === QUESTION ===
     public function show_questions_panel()
     {
+        $title = 'Trang Quản Lý Câu Hỏi';
         $route = new RAdmin();
-        $route->show_head();
+        $route->show_head($title);
         $route->show_navbar($this->info);
         $route->show_questions_panel();
         $route->show_foot();
@@ -108,8 +117,9 @@ class AdminController
     // === TEST ===
     public function show_tests_panel()
     {
+        $title = 'Trang Quản Lý Đề Thi';
         $route = new RAdmin();
-        $route->show_head();
+        $route->show_head($title);
         $route->show_navbar($this->info);
         $route->show_tests_panel();
         $route->show_foot();
@@ -117,10 +127,11 @@ class AdminController
 
     public function test_detail()
     {
+        $title = 'Trang Chi Tiết Điểm Thi';
         $route = new RAdmin();
         $model = new Admin();
         $test_code = htmlspecialchars($_GET['test_code']);
-        $route->show_head();
+        $route->show_head($title);
         $route->show_navbar($this->info);
         $route->show_tests_detail($model->get_quest_of_test($test_code));
         $route->show_foot();
@@ -493,38 +504,6 @@ class AdminController
                 $result['status_value'] = "Lỗi! Tài khoản đã tồn tại!";
                 $return['status'] = 0;
             }
-        }
-        echo json_encode($result);
-    }
-
-    public function check_add_grade_via_file()
-    {
-        $inputFileType = 'Xlsx';
-        $result = array();
-        $reader = IOFactory::createReader($inputFileType);
-        move_uploaded_file($_FILES['file']['tmp_name'], $_FILES['file']['name']);
-        $spreadsheet = $reader->load($_FILES['file']['name']);
-        $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
-        unlink($_FILES['file']['name']);
-        $count = 0;
-        $err_list = '';
-        for ($i = 4; $i < count($sheetData); $i++) {
-            if ($sheetData[$i]['A'] == '')
-                continue;
-            $stt = $sheetData[$i]['A'];
-            $name = $sheetData[$i]['B'];
-            $add = $this->add_grade($name);
-            if ($add)
-                $count++;
-            else
-                $err_list += $stt . ' ';
-        }
-        if ($err_list == '') {
-            $result['status_value'] = "Thêm thành công " . $count . ' tài khoản!';
-            $result['status'] = 1;
-        } else {
-            $result['status_value'] = "Lỗi! Không thể thêm tài khoản có STT: " . $err_list . ', vui lòng xem lại.';
-            $result['status'] = 0;
         }
         echo json_encode($result);
     }
@@ -1214,6 +1193,7 @@ class AdminController
                 //Tạo bộ câu hỏi cho đề thi
                 $model = new Admin();
                 $list_unit = $model->get_list_units($grade_id, $subject_id);
+
                 foreach ($list_unit as $unit) {
                     $limit = $_POST[$unit->unit];
                     $list_quest = $model->list_quest_of_unit($grade_id, $subject_id, $unit->unit, $limit);

@@ -1,33 +1,9 @@
-<!-- Footer Start -->
-<footer class="footer">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-6">
-				<script>
-					document.write(new Date().getFullYear());
-				</script>
-				© Hyper - Coderthemes.com
-			</div>
-			<div class="col-md-6">
-				<div class="text-md-end footer-links d-none d-md-block">
-					<a href="javascript: void(0);">About</a>
-					<a href="javascript: void(0);">Support</a>
-					<a href="javascript: void(0);">Contact Us</a>
-				</div>
-			</div>
-		</div>
-	</div>
-</footer>
-<!-- end Footer -->
-</div>
-
 <!-- ============================================================== -->
 <!-- End Page content -->
 <!-- ============================================================== -->
 </div>
 <!-- END wrapper -->
 
-<!-- Right Sidebar -->
 <!-- Right Sidebar -->
 <div class="end-bar">
 
@@ -153,7 +129,7 @@
 <script src="public/js/vendor/dataTables.checkboxes.min.js"></script>
 <!-- third party js ends -->
 
-<script src="vendors/dropify/js/dropify.min.js"></script>
+<script src="public/js/vendor/dropify.min.js"></script>
 <script src="public/js/scripts/form-file-uploads.min.js"></script>
 
 <!-- demo app -->
