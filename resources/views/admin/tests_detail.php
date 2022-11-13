@@ -22,8 +22,12 @@
 
 	<div class="h-100" id="leftside-menu-container" data-simplebar="">
 		<!--- Sidemenu -->
-		<ul class="side-nav">
-			<li class="side-nav-title side-nav-item">Navigation</li>
+		<ul class="side-nav" id="side-nav">
+			<li class="side-nav-item">
+				<a href="#" class="side-nav-link">
+					<span>Navigation</span>
+				</a>
+			</li>
 
 			<li class="side-nav-item">
 				<a href="index.php?action=show_dashboard" class="side-nav-link">
@@ -33,18 +37,22 @@
 				</a>
 			</li>
 
-			<li class="side-nav-title side-nav-item">Manages</li>
+			<li class="side-nav-item">
+				<a href="#" class="side-nav-link">
+					<span>Manages</span>
+				</a>
+			</li>
 
 			<li class="side-nav-item">
 				<a href="index.php?action=show_admins_panel" class="side-nav-link">
-					<i class="uil-user-circle"></i>
+					<i class="mdi mdi-account-tie"></i>
 					<span> Quản lý Admin </span>
 				</a>
 			</li>
 
 			<li class="side-nav-item">
 				<a href="index.php?action=show_teachers_panel" class="side-nav-link">
-					<i class="uil-user-circle"></i>
+					<i class="mdi mdi-account-star"></i>
 					<span> Quản lý Giáo viên </span>
 				</a>
 			</li>
@@ -65,7 +73,7 @@
 
 			<li class="side-nav-item">
 				<a href="index.php?action=show_students_panel" class="side-nav-link">
-					<i class="uil-user-circle"></i>
+					<i class="mdi mdi-account"></i>
 					<span> Quản lý Học Sinh </span>
 				</a>
 			</li>
@@ -91,17 +99,21 @@
 				</a>
 			</li>
 
-			<li class="side-nav-title side-nav-item">Contact</li>
+			<li class="side-nav-item">
+				<a href="#" class="side-nav-link">
+					<span>Contact</span>
+				</a>
+			</li>
 
 			<li class="side-nav-item">
-				<a href="index.php?action=show_notifications_panel" class="side-nav-link">
+				<a href="#" class="side-nav-link maintained">
 					<i class="uil-bell"></i>
 					<span> Thông Báo </span>
 				</a>
 			</li>
 
 			<li class="side-nav-item">
-				<a href="index.php?action=show_about" class="side-nav-link">
+				<a href="#" class="side-nav-link maintained">
 					<i class="uil-user-square"></i>
 					<span> Liên hệ </span>
 				</a>
@@ -114,11 +126,11 @@
 				<i class="mdi mdi-close"></i>
 			</a>
 			<img src="public/img/help-icon.svg" height="90" alt="Helper Icon Image" />
-			<h5 class="mt-3">Unlimited Access</h5>
+			<h5 class="mt-3">Truy cập vô hạn</h5>
 			<p class="mb-3">
-				Upgrade to plan to get access to unlimited reports
+				Báo cáo chi tiết đề và các câu hỏi thông qua biểu đồ.
 			</p>
-			<a href="javascript: void(0);" class="btn btn-outline-light btn-sm">Upgrade</a>
+			<a href="javascript: void(0);" class="btn btn-outline-light btn-sm">Nâng cấp</a>
 		</div>
 		<!-- end Help Box -->
 		<!-- End Sidebar -->

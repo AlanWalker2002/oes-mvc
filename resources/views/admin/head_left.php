@@ -27,6 +27,8 @@
 	<link rel="stylesheet" type="text/css" href="public/css/vendor/dropify.min.css">
 	<script src="public/js/admin_functions.js"></script>
 	<script src="vendors/ckeditor/ckeditor.js"></script>
+	<script src="vendors/ckeditor/ckfinder/ckfinder.js"></script>
+	<script src="vendors/ckeditor/plugins/ckeditor_wiris/integration/WIRISplugins.js?viewer=image"></script>
 
 	<style>
 		.valid-img {
@@ -36,8 +38,14 @@
 			top: 38px;
 		}
 
+		p {
+			margin-top: 4px;
+			margin-bottom: 0;
+		}
+
 		.flex {
 			display: flex;
+			align-items: center;
 		}
 
 		.relative {
@@ -53,6 +61,86 @@
 			width: 20px;
 			right: 10px;
 			top: 38px;
+		}
+
+		#translate_select {
+			margin-top: 8px;
+			margin-right: 46px;
+		}
+
+		.goog-te-banner-frame {
+			opacity: 0.8;
+		}
+
+		.goog-te-combo {
+			display: block;
+			width: 100%;
+			padding: 0.45rem 0.9rem;
+			font-size: 0.9rem;
+			font-weight: 400;
+			line-height: 1.5;
+			color: #6c757d;
+			background-color: #fff;
+			background-clip: padding-box;
+			border: 1px solid #dee2e6;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+			border-radius: 0.25rem;
+			-webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+			transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+			transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+			transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+		}
+
+		.goog-te-combo:focus {
+			outline: none;
+		}
+
+		.custom-panel {
+			position: relative;
+			border-radius: 15px;
+			border: 1px solid #eee;
+			opacity: 0.9;
+			overflow: hidden;
+		}
+
+		.fs-40 {
+			font-size: 40px;
+		}
+
+		@keyframes rotate {
+			100% {
+				transform: rotate(1turn);
+			}
+		}
+
+		.custom-panel::before {
+			content: '';
+			position: absolute;
+			z-index: -2;
+			left: -50%;
+			top: -50%;
+			width: 200%;
+			height: 200%;
+			background-color: #399953;
+			background-repeat: no-repeat;
+			background-size: 50% 50%, 50% 50%;
+			background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+			background-image: linear-gradient(#399953, #399953), linear-gradient(#fbb300, #fbb300), linear-gradient(#d53e33, #d53e33), linear-gradient(#377af5, #377af5);
+			animation: rotate 10s linear infinite;
+		}
+
+		.custom-panel::after {
+			content: '';
+			position: absolute;
+			z-index: -1;
+			left: 6px;
+			top: 6px;
+			width: calc(100% - 12px);
+			height: calc(100% - 12px);
+			background: white;
+			border-radius: 5px;
 		}
 	</style>
 </head>

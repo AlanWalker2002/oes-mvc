@@ -174,7 +174,7 @@ class Student extends Database
 
 	public function get_doing_quest($test_code, $student_id)
 	{
-		$sql = "SELECT student_test_detail.*,questions.question_content, students.name as student_name, classes.name as class_name, students.avatar, tests.time_to_do, tests.total_questions FROM student_test_detail
+		$sql = "SELECT student_test_detail.*,questions.question_content, questions.answer_a as answer_qa, questions.answer_b as answer_qb, questions.answer_c as answer_qc, questions.answer_d as answer_qd, students.name as student_name, classes.name as class_name, students.avatar, tests.time_to_do, tests.total_questions FROM student_test_detail
 		INNER JOIN questions ON student_test_detail.question_id = questions.id
         INNER JOIN students ON student_test_detail.student_id = students.id
         INNER JOIN tests ON student_test_detail.test_code = tests.test_code
@@ -186,10 +186,10 @@ class Student extends Database
 
 	public function get_result_quest($test_code, $student_id)
 	{
-		$sql = "SELECT student_test_detail.*, questions.question_content, students.name as student_name, classes.name as class_name, students.avatar, questions.correct_answer, tests.total_questions FROM student_test_detail 
-		INNER JOIN questions ON student_test_detail.question_id = questions.id 
-		INNER JOIN students ON student_test_detail.student_id = students.id
-		INNER JOIN tests ON student_test_detail.test_code = tests.test_code
+		$sql = "SELECT student_test_detail.*,questions.question_content, questions.answer_a as answer_qa, questions.answer_b as answer_qb, questions.answer_c as answer_qc, questions.answer_d as answer_qd, students.name as student_name, classes.name as class_name, students.avatar, questions.correct_answer, questions.explanation, tests.total_questions FROM student_test_detail
+		INNER JOIN questions ON student_test_detail.question_id = questions.id
+        INNER JOIN students ON student_test_detail.student_id = students.id
+        INNER JOIN tests ON student_test_detail.test_code = tests.test_code
 		INNER JOIN classes ON students.class_id = classes.id
 		WHERE student_test_detail.test_code = $test_code AND student_id = $student_id ORDER BY student_test_detail.id";
 		$this->set_query($sql);

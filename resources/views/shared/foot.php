@@ -118,6 +118,8 @@
 <script src="public/js/vendor.min.js"></script>
 <script src="public/js/app.min.js"></script>
 
+<script src="vendors/counter/counterUp.js"></script>
+
 <!-- third party js -->
 <script src="public/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
 <script src="public/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
@@ -133,7 +135,6 @@
 <script src="public/js/scripts/form-file-uploads.min.js"></script>
 
 <!-- demo app -->
-<script src="public/js/pages/demo.dashboard-analytics.js"></script>
 <script src="public/js/pages/demo.products.js"></script>
 <!-- end demo js-->
 
@@ -190,6 +191,40 @@
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+
+<script>
+	function googleTranslateElementInit() {
+		new google.translate.TranslateElement({
+			pageLanguage: 'vi'
+		}, 'translate_select');
+	}
+
+	function filterSearch() {
+		var input, filter, ul, li, a, span, i, txtValue;
+		input = document.getElementById("top-search");
+		filter = input.value.charAt(0).toUpperCase() + input.value.slice(1)
+		ul = document.getElementById("side-nav");
+		li = ul.getElementsByTagName("li");
+
+		for (i = 0; i < li.length; i++) {
+			a = li[i].getElementsByTagName("a")[0];
+			txtValue = a.textContent || a.innerText;
+			console.log(txtValue);
+			if ((txtValue.charAt(0).toUpperCase() + txtValue.slice(1)).indexOf(filter) > -1) {
+				li[i].style.display = "";
+			} else {
+				li[i].style.display = "none";
+			}
+		}
+	}
+
+	$('.maintained').click(() => {
+		toastr.warning('Chức năng đang trong quá trình phát triển');
+	});
+</script>
+
 </body>
 
 </html>

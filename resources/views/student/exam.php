@@ -177,74 +177,71 @@
 									<div class="card">
 										<div class="card-header flex-full">
 											<h5>Câu <?= ($i + 1) ?></h5>
-											<a class="custom-accordion-title d-block pt-2 pb-2 arrow-id-<?= ($i + 1) ?>" data-bs-toggle="collapse" onclick="changeIcon(<?= $i + 1 ?>)" href="#collapse-<?= $i + 1 ?>" aria-expanded="true" aria-controls="collapse-<?= $i + 1 ?>">
+											<a href="#" class="custom-accordion-title d-block pt-2 pb-2 arrow-id-<?= ($i + 1) ?>" onclick="changeIcon(<?= $i + 1 ?>)">
 												<i class="mdi mdi-arrow-up-drop-circle fs-18"></i>
 											</a>
 										</div>
-										<div id="collapse-<?= $i + 1 ?>" class="collapse show" aria-labelledby="heading-<?= $i + 1 ?>" data-bs-parent="#accordion-<?= ($i + 1) ?>">
+										<div id="slide-<?= ($i + 1) ?>">
 											<div class="card-body">
 												<h5 class="card-title">
 													<?= $test[$i]->question_content ?>
 												</h5>
 												<div class="quest-content flex">
-													<div class="mt-2 me-5">
+													<div class="mt-2 me-5 fs-16">
 														<div class="form-check flex">
 															<?php
 															if (trim($test[$i]->student_answer) == trim($test[$i]->answer_a)) {
-																echo '<input class="form-check-input me-1" name="' . $test[$i]->question_id . '" data-idquest="' . $test[$i]->question_id . '" type="radio" data-stt="' . ($i + 1) . '" value="' . trim($test[$i]->answer_a) . '" checked />';
+																echo '<input class="form-check-input me-1" name="' . $test[$i]->question_id . '" data-idquest="' . $test[$i]->question_id . '" type="radio" data-stt="' . ($i + 1) . '" value="' . strip_tags(explode('.', $test[$i]->answer_a)[0]) . '" checked />';
 															} else {
-																echo '<input class="form-check-input me-1" name="' . $test[$i]->question_id . '" data-idquest="' . $test[$i]->question_id . '" type="radio" data-stt="' . ($i + 1) . '" value="' . trim($test[$i]->answer_a) . '" />';
+																echo '<input class="form-check-input me-1" name="' . $test[$i]->question_id . '" data-idquest="' . $test[$i]->question_id . '" type="radio" data-stt="' . ($i + 1) . '" value="' . strip_tags(explode('.', $test[$i]->answer_a)[0]) . '" />';
 															}
 															?>
 
 															<label class="form-check-label flex" for="customRadio1">
-																<i class="mdi mdi-alpha-a-circle me-2 fs-24"></i>
-																<?= $test[$i]->answer_a ?>
+																<?= $test[$i]->answer_qa ?>
 															</label>
 														</div>
 														<div class="form-check flex">
 															<?php
 															if (trim($test[$i]->student_answer) == trim($test[$i]->answer_c)) {
-																echo '<input class="form-check-input me-1" name="' . $test[$i]->question_id . '" data-idquest="' . $test[$i]->question_id . '" type="radio" data-stt="' . ($i + 1) . '" value="' . trim($test[$i]->answer_c) . '" checked />';
+																echo '<input class="form-check-input me-1" name="' . $test[$i]->question_id . '" data-idquest="' . $test[$i]->question_id . '" type="radio" data-stt="' . ($i + 1) . '" value="' . strip_tags(explode('.', $test[$i]->answer_c)[0]) . '" checked />';
 															} else {
-																echo '<input class="form-check-input me-1" name="' . $test[$i]->question_id . '" data-idquest="' . $test[$i]->question_id . '" type="radio" data-stt="' . ($i + 1) . '" value="' . trim($test[$i]->answer_c) . '" />';
+																echo '<input class="form-check-input me-1" name="' . $test[$i]->question_id . '" data-idquest="' . $test[$i]->question_id . '" type="radio" data-stt="' . ($i + 1) . '" value="' . strip_tags(explode('.', $test[$i]->answer_c)[0]) . '" />';
 															}
 															?>
 
 
 															<label class="form-check-label flex" for="customRadio2">
-																<i class="mdi mdi-alpha-c-circle me-2 fs-24"></i>
-																<?= $test[$i]->answer_c ?>
+																<?= $test[$i]->answer_qc ?>
 															</label>
 														</div>
 													</div>
 
-													<div class="mt-2">
+													<div class="mt-2 fs-16">
 														<div class="form-check flex">
 															<?php
 															if (trim($test[$i]->student_answer) == trim($test[$i]->answer_b)) {
-																echo '<input class="form-check-input me-1" name="' . $test[$i]->question_id . '" data-idquest="' . $test[$i]->question_id . '" type="radio" data-stt="' . ($i + 1) . '" value="' . trim($test[$i]->answer_b) . '" checked />';
+																echo '<input class="form-check-input me-1" name="' . $test[$i]->question_id . '" data-idquest="' . $test[$i]->question_id . '" type="radio" data-stt="' . ($i + 1) . '" value="' . strip_tags(explode('.', $test[$i]->answer_b)[0]) . '" checked />';
 															} else {
-																echo '<input class="form-check-input me-1" name="' . $test[$i]->question_id . '" data-idquest="' . $test[$i]->question_id . '" type="radio" data-stt="' . ($i + 1) . '" value="' . trim($test[$i]->answer_b) . '" />';
+																echo '<input class="form-check-input me-1" name="' . $test[$i]->question_id . '" data-idquest="' . $test[$i]->question_id . '" type="radio" data-stt="' . ($i + 1) . '" value="' . strip_tags(explode('.', $test[$i]->answer_b)[0]) . '" />';
 															}
 															?>
 
 															<label class="form-check-label flex" for="customRadio1">
-																<i class="mdi mdi-alpha-b-circle me-2 fs-24"></i><?= $test[$i]->answer_b ?>
+																<?= $test[$i]->answer_qb ?>
 															</label>
 														</div>
 														<div class="form-check flex">
 															<?php
 															if (trim($test[$i]->student_answer) == trim($test[$i]->answer_d)) {
-																echo '<input class="form-check-input me-1" name="' . $test[$i]->question_id . '" data-idquest="' . $test[$i]->question_id . '" type="radio" data-stt="' . ($i + 1) . '" value="' . trim($test[$i]->answer_d) . '" checked />';
+																echo '<input class="form-check-input me-1" name="' . $test[$i]->question_id . '" data-idquest="' . $test[$i]->question_id . '" type="radio" data-stt="' . ($i + 1) . '" value="' . strip_tags(explode('.', $test[$i]->answer_d)[0]) . '" checked />';
 															} else {
-																echo '<input class="form-check-input me-1" name="' . $test[$i]->question_id . '" data-idquest="' . $test[$i]->question_id . '" type="radio" data-stt="' . ($i + 1) . '" value="' . trim($test[$i]->answer_d) . '" />';
+																echo '<input class="form-check-input me-1" name="' . $test[$i]->question_id . '" data-idquest="' . $test[$i]->question_id . '" type="radio" data-stt="' . ($i + 1) . '" value="' . strip_tags(explode('.', $test[$i]->answer_d)[0]) . '" />';
 															}
 															?>
 
 															<label class="form-check-label flex" for="customRadio2">
-																<i class="mdi mdi-alpha-d-circle me-2 fs-24"></i>
-																<?= $test[$i]->answer_d ?>
+																<?= $test[$i]->answer_qd ?>
 															</label>
 														</div>
 													</div>
@@ -337,7 +334,7 @@
 	})
 
 	function countdown() {
-		cdID = setInterval(function() {
+		var cdID = setInterval(function() {
 			if (sec == 0) {
 				min--;
 				sec = 60;
@@ -367,14 +364,13 @@
 			// $('#hr_dot').css('transform', `rotate(${min_text * 30}deg)`);
 			$('.min_dot').css('transform', `rotate(${min_text * 6}deg)`);
 			$('.sec_dot').css('transform', `rotate(${sec_text * 6}deg)`);
-		}, 1000);
 
-		if (min < 0) {
-			alert('Hết giờ, sau 3s hệ thống sẽ tự động nộp bài!');
-			setTimeout(() => {
+			if (min < 0) {
+				clearInterval(cdID);
+				alert('Hết giờ, hệ thống sẽ tự động nộp bài!');
 				window.location.replace("index.php?action=accept_test");
-			}, 3000)
-		}
+			}
+		}, 1000);
 	}
 
 	window.onbeforeunload = function() {

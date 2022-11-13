@@ -22,86 +22,97 @@
 
 	<div class="h-100" id="leftside-menu-container" data-simplebar="">
 		<!--- Sidemenu -->
-		<ul class="side-nav">
-			<li class="side-nav-title side-nav-item">Navigation</li>
+		<ul class="side-nav" id="side-nav">
+			<li class="side-nav-item">
+				<a href="#" class="side-nav-link">
+					<span>Navigation</span>
+				</a>
+			</li>
 
 			<li class="side-nav-item menuitem-active">
 				<a href="index.php?action=show_dashboard" class="side-nav-link active">
 					<i class="uil-home-alt"></i>
-					<!-- <span class="badge bg-success float-end">4</span> -->
-					<span> Trang tổng quan </span>
+					<span>Trang tổng quan</span>
 				</a>
 			</li>
 
-			<li class="side-nav-title side-nav-item">Manages</li>
+			<li class="side-nav-item">
+				<a href="#" class="side-nav-link">
+					<span>Manages</span>
+				</a>
+			</li>
 
 			<li class="side-nav-item">
 				<a href="index.php?action=show_admins_panel" class="side-nav-link">
-					<i class="uil-user-circle"></i>
-					<span> Quản lý Admin </span>
+					<i class="mdi mdi-account-tie"></i>
+					<span>Quản lý Admin</span>
 				</a>
 			</li>
 
 			<li class="side-nav-item">
 				<a href="index.php?action=show_teachers_panel" class="side-nav-link">
-					<i class="uil-user-circle"></i>
-					<span> Quản lý Giáo viên </span>
+					<i class="mdi mdi-account-star"></i>
+					<span>Quản lý Giáo Viên</span>
 				</a>
 			</li>
 
 			<li class="side-nav-item">
 				<a href="index.php?action=show_grades_panel" class="side-nav-link">
 					<i class="uil-servers"></i>
-					<span> Quản lý Khối </span>
+					<span>Quản lý Khối</span>
 				</a>
 			</li>
 
 			<li class="side-nav-item">
 				<a href="index.php?action=show_classes_panel" class="side-nav-link">
 					<i class="uil-diary"></i>
-					<span> Quản lý Lớp </span>
+					<span>Quản lý Lớp</span>
 				</a>
 			</li>
 
 			<li class="side-nav-item">
 				<a href="index.php?action=show_students_panel" class="side-nav-link">
-					<i class="uil-user-circle"></i>
-					<span> Quản lý Học Sinh </span>
+					<i class="mdi mdi-account"></i>
+					<span>Quản lý Học Sinh</span>
 				</a>
 			</li>
 
 			<li class="side-nav-item">
 				<a href="index.php?action=show_subjects_panel" class="side-nav-link">
 					<i class="uil-subject"></i>
-					<span> Quản lý Môn </span>
+					<span>Quản lý Môn</span>
 				</a>
 			</li>
 
 			<li class="side-nav-item">
 				<a href="index.php?action=show_questions_panel" class="side-nav-link">
 					<i class="uil-question-circle"></i>
-					<span> Quản lý Câu Hỏi </span>
+					<span>Quản lý Câu Hỏi</span>
 				</a>
 			</li>
 
 			<li class="side-nav-item">
 				<a href="index.php?action=show_tests_panel" class="side-nav-link">
 					<i class="uil-clipboard-alt"></i>
-					<span> Quản lý Đề Thi </span>
+					<span>Quản lý Đề Thi</span>
 				</a>
 			</li>
 
-			<li class="side-nav-title side-nav-item">Contact</li>
+			<li class="side-nav-item">
+				<a href="#" class="side-nav-link">
+					<span>Contact</span>
+				</a>
+			</li>
 
 			<li class="side-nav-item">
-				<a href="index.php?action=show_" class="side-nav-link">
+				<a href="#" class="side-nav-link maintained">
 					<i class="uil-bell"></i>
 					<span> Thông Báo </span>
 				</a>
 			</li>
 
 			<li class="side-nav-item">
-				<a href="index.php?action=show_" class="side-nav-link">
+				<a href="#" class="side-nav-link maintained">
 					<i class="uil-user-square"></i>
 					<span> Liên hệ </span>
 				</a>
@@ -114,11 +125,11 @@
 				<i class="mdi mdi-close"></i>
 			</a>
 			<img src="public/img/help-icon.svg" height="90" alt="Helper Icon Image" />
-			<h5 class="mt-3">Unlimited Access</h5>
+			<h5 class="mt-3">Truy cập vô hạn</h5>
 			<p class="mb-3">
-				Upgrade to plan to get access to unlimited reports
+				Báo cáo chi tiết đề và các câu hỏi thông qua biểu đồ.
 			</p>
-			<a href="javascript: void(0);" class="btn btn-outline-light btn-sm">Upgrade</a>
+			<a href="javascript: void(0);" class="btn btn-outline-light btn-sm">Nâng cấp</a>
 		</div>
 		<!-- end Help Box -->
 		<!-- End Sidebar -->
@@ -137,131 +148,116 @@
 	<div class="content">
 		<!-- Start Content-->
 		<div class="container-fluid">
+
 			<!-- start page title -->
 			<div class="row">
 				<div class="col-12">
 					<div class="page-title-box">
 						<div class="page-title-right">
-							<form class="d-flex">
-								<div class="input-group">
-									<input type="text" class="form-control form-control-light" id="dash-daterange" />
-									<span class="input-group-text bg-primary border-primary text-white">
-										<i class="mdi mdi-calendar-range font-13"></i>
-									</span>
-								</div>
-								<a href="javascript: void(0);" class="btn btn-primary ms-2">
-									<i class="mdi mdi-autorenew"></i>
-								</a>
-							</form>
+							<ol class="breadcrumb m-0">
+								<li class="breadcrumb-item active"><i class="uil-home-alt"></i> Trang tổng quan</li>
+							</ol>
 						</div>
-						<h4 class="page-title">Analytics</h4>
 					</div>
 				</div>
 			</div>
 			<!-- end page title -->
 
 			<div class="row">
-				<div class="col-xl-3 col-lg-4">
-					<div class="card tilebox-one">
-						<div class="card-body">
-							<i class="uil uil-users-alt float-end"></i>
-							<h6 class="text-uppercase mt-0">
-								Active Users
-							</h6>
-							<h2 class="my-2" id="active-users-count">
-								121
-							</h2>
-							<p class="mb-0 text-muted">
-								<span class="text-success me-1"><span class="mdi mdi-arrow-up-bold"></span>
-									5.27%</span>
-								<span class="text-nowrap">Since last month</span>
-							</p>
-						</div>
-						<!-- end card-body-->
-					</div>
-					<!--end card-->
-
-					<div class="card tilebox-one">
-						<div class="card-body">
-							<i class="uil uil-window-restore float-end"></i>
-							<h6 class="text-uppercase mt-0">
-								Views per minute
-							</h6>
-							<h2 class="my-2" id="active-views-count">
-								560
-							</h2>
-							<p class="mb-0 text-muted">
-								<span class="text-danger me-1"><span class="mdi mdi-arrow-down-bold"></span>
-									1.08%</span>
-								<span class="text-nowrap">Since previous week</span>
-							</p>
-						</div>
-						<!-- end card-body-->
-					</div>
-					<!--end card-->
-
-					<div class="card cta-box overflow-hidden">
-						<div class="card-body">
-							<div class="d-flex align-items-center">
-								<div>
-									<h3 class="m-0 fw-normal cta-box-title">
-										Enhance your
-										<b>Campaign</b> for better
-										outreach
-										<i class="mdi mdi-arrow-right"></i>
-									</h3>
-								</div>
-								<img class="ms-3" src="public/img/email-campaign.svg" width="92" alt="Generic placeholder image" />
-							</div>
-						</div>
-						<!-- end card-body -->
-					</div>
-				</div>
-				<!-- end col -->
-
-				<div class="col-xl-9 col-lg-8">
-					<div class="card card-h-100">
-						<div class="card-body">
-							<div class="alert alert-warning alert-dismissible fade show mb-3" role="alert">
-								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-								Property HY1xx is not receiving
-								hits. Either your site is not
-								receiving any sessions or it is not
-								tagged correctly.
-							</div>
-							<ul class="nav float-end d-none d-lg-flex">
-								<li class="nav-item">
-									<a class="nav-link text-muted" href="#">Today</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link text-muted" href="#">7d</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link active" href="#">15d</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link text-muted" href="#">1m</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link text-muted" href="#">1y</a>
-								</li>
-							</ul>
-							<h4 class="header-title mb-3">
-								Sessions Overview
-							</h4>
-
-							<div dir="ltr">
-								<div id="sessions-overview" class="apex-charts mt-3" data-colors="#0acf97"></div>
-							</div>
-						</div>
-						<!-- end card-body-->
-					</div>
-					<!-- end card-->
-				</div>
+				<?php
+				for ($i = 0; $i < count($dashboard); $i++) {
+				?>
+					<div class="col-lg-6 col-xl-3">
+						<div class="card">
+							<div class="card-body">
+								<div class="row align-items-center">
+									<div class="col-8">
+										<h5 class="text-muted fw-normal mt-0 text-truncate"><?= $dashboard[$i]->name ?></h5>
+										<h3 class="my-2 py-1 counter" data-target="<?= $dashboard[$i]->count ?>"><?= $dashboard[$i]->count ?></h3>
+										<p class="mb-0 text-muted">
+											<a href="index.php?action=<?= $dashboard[$i]->actionlink ?>" class="text-muted me-2">
+												<i class="mdi mdi-numeric-<?= $i + 1 ?>-box-multiple"></i>
+												Click!
+											</a>
+										</p>
+									</div>
+									<div class="col-4">
+										<div class="text-center custom-panel">
+											<!-- <div id="campaign-sent-chart" data-colors="#727cf5"></div> -->
+											<i class="mdi <?= $dashboard[$i]->icon ?> fs-40"></i>
+										</div>
+									</div>
+								</div> <!-- end row-->
+							</div> <!-- end card-body -->
+						</div> <!-- end card -->
+					</div> <!-- end col -->
+				<?php
+				}
+				?>
 			</div>
+			<!-- end row -->
 
 			<div class="row">
-				<div class="col-12">
+				<div class="col-lg-4">
+					<div class="card">
+						<div class="card-body">
+							<div class="dropdown float-end">
+								<a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+									<i class="mdi mdi-dots-vertical"></i>
+								</a>
+							</div>
+
+							<h4 class="header-title mb-4">Tổng hợp học lực</h4>
+
+							<div class="row text-center mt-2">
+								<div class="col-md-6 flex">
+									<label for="class_id" class="me-2">Lớp</label>
+									<select name="class_id" id="class_id" class="form-control" onchange="list_check()"></select>
+								</div>
+								<div class="col-md-6 flex">
+									<label for="test_code" class="me-2">Mã đề</label>
+									<select name="test_code" id="test_code" class="form-control" onchange="list_check()"></select>
+								</div>
+							</div>
+
+							<div class="row text-center mt-2">
+								<div class="col-md-3">
+									<i class="mdi mdi-alpha-t-box widget-icon rounded-circle bg-light-lighten text-muted"></i>
+									<h3 class="fw-normal mt-3">
+										<span id="good_student">0</span>
+									</h3>
+									<p class="text-muted mb-0 mb-2"><i class="mdi mdi-checkbox-blank-circle text-success"></i> Tốt</p>
+								</div>
+								<div class="col-md-3">
+									<i class="mdi mdi-alpha-k-circle widget-icon rounded-circle bg-light-lighten text-muted"></i>
+									<h3 class="fw-normal mt-3">
+										<span id="rather_student">0</span>
+									</h3>
+									<p class="text-muted mb-0 mb-2"><i class="mdi mdi-checkbox-blank-circle text-primary"></i> Khá</p>
+								</div>
+								<div class="col-md-3">
+									<i class="mdi mdi-alpha-m-box widget-icon rounded-circle bg-light-lighten text-muted"></i>
+									<h3 class="fw-normal mt-3">
+										<span id="medium_student">0</span>
+									</h3>
+									<p class="text-muted mb-0 mb-2"><i class="mdi mdi-checkbox-blank-circle text-warning"></i> Trung bình</p>
+								</div>
+								<div class="col-md-3">
+									<i class="mdi mdi-alpha-l-circle widget-icon rounded-circle bg-light-lighten text-muted"></i>
+									<h3 class="fw-normal mt-3">
+										<span id="least_student">0</span>
+									</h3>
+									<p class="text-muted mb-0 mb-2"><i class="mdi mdi-checkbox-blank-circle text-danger"></i> Yếu</p>
+								</div>
+							</div>
+						</div>
+						<!-- end card body-->
+					</div>
+					<!-- end card -->
+				</div>
+				<!-- end col-->
+
+				<div class="col-xl-4 col-lg-12">
 					<div class="card">
 						<div class="card-body">
 							<div class="dropdown float-end">
@@ -270,96 +266,91 @@
 								</a>
 								<div class="dropdown-menu dropdown-menu-end">
 									<!-- item-->
-									<a href="javascript:void(0);" class="dropdown-item">Refresh Report</a>
+									<a href="javascript:void(0);" class="dropdown-item">Settings</a>
 									<!-- item-->
-									<a href="javascript:void(0);" class="dropdown-item">Export Report</a>
+									<a href="javascript:void(0);" class="dropdown-item">Action</a>
 								</div>
 							</div>
-							<h4 class="header-title">
-								Sessions by country
-							</h4>
+							<h4 class="header-title mb-3">Top Performing</h4>
 
-							<div class="row">
-								<div class="col-lg-8">
-									<div id="world-map-markers" class="mt-3 mb-3" style="height: 300px"></div>
-								</div>
-								<div class="col-lg-4" dir="ltr">
-									<div id="country-chart" class="apex-charts" data-colors="#727cf5"></div>
-								</div>
-							</div>
-						</div>
-						<!-- end card-body-->
-					</div>
-					<!-- end card-->
-				</div>
-				<!-- end col-->
-			</div>
-			<!-- end row -->
-
-			<div class="row">
-				<div class="col-xl-4 col-lg-12">
-					<div class="card">
-						<div class="card-body">
-							<div class="dropdown float-end">
-								<a href="#" class="dropdown-toggle arrow-none card-drop p-0" data-bs-toggle="dropdown" aria-expanded="false">
-									<i class="mdi mdi-dots-vertical"></i>
-								</a>
-								<div class="dropdown-menu dropdown-menu-end">
-									<a href="javascript:void(0);" class="dropdown-item">Refresh Report</a>
-									<a href="javascript:void(0);" class="dropdown-item">Export Report</a>
-								</div>
-							</div>
-							<h4 class="header-title">
-								Views Per Minute
-							</h4>
-
-							<div id="views-min" class="apex-charts mt-2" data-colors="#0acf97"></div>
-
-							<div class="table-responsive mt-3">
-								<table class="table table-sm mb-0 font-13">
+							<div class="table-responsive">
+								<table class="table table-striped table-sm table-nowrap table-centered mb-0">
 									<thead>
 										<tr>
-											<th>Page</th>
-											<th>Views</th>
-											<th>Bounce Rate</th>
+											<th>User</th>
+											<th>Leads</th>
+											<th>Deals</th>
+											<th>Tasks</th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
 											<td>
-												<a href="javascript:void(0);" class="text-muted">/hyper/dashboard-analytics</a>
+												<h5 class="font-15 mb-1 fw-normal">Jeremy Young</h5>
+												<span class="text-muted font-13">Senior Sales Executive</span>
 											</td>
-											<td>25</td>
-											<td>87.5%</td>
+											<td>187</td>
+											<td>154</td>
+											<td>49</td>
+											<td class="table-action">
+												<a href="javascript: void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+											</td>
 										</tr>
 										<tr>
 											<td>
-												<a href="javascript:void(0);" class="text-muted">/hyper/dashboard-crm</a>
+												<h5 class="font-15 mb-1 fw-normal">Thomas Krueger</h5>
+												<span class="text-muted font-13">Senior Sales Executive</span>
 											</td>
-											<td>15</td>
-											<td>21.48%</td>
+											<td>235</td>
+											<td>127</td>
+											<td>83</td>
+											<td class="table-action">
+												<a href="javascript: void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+											</td>
 										</tr>
 										<tr>
 											<td>
-												<a href="javascript:void(0);" class="text-muted">/ubold/dashboard</a>
+												<h5 class="font-15 mb-1 fw-normal">Pete Burdine</h5>
+												<span class="text-muted font-13">Senior Sales Executive</span>
 											</td>
-											<td>10</td>
-											<td>63.59%</td>
+											<td>365</td>
+											<td>148</td>
+											<td>62</td>
+											<td class="table-action">
+												<a href="javascript: void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+											</td>
 										</tr>
 										<tr>
 											<td>
-												<a href="javascript:void(0);" class="text-muted">/minton/home</a>
+												<h5 class="font-15 mb-1 fw-normal">Mary Nelson</h5>
+												<span class="text-muted font-13">Senior Sales Executive</span>
 											</td>
-											<td>7</td>
-											<td>56.12%</td>
+											<td>753</td>
+											<td>159</td>
+											<td>258</td>
+											<td class="table-action">
+												<a href="javascript: void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<h5 class="font-15 mb-1 fw-normal">Kevin Grove</h5>
+												<span class="text-muted font-13">Senior Sales Executive</span>
+											</td>
+											<td>458</td>
+											<td>126</td>
+											<td>73</td>
+											<td class="table-action">
+												<a href="javascript: void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+											</td>
 										</tr>
 									</tbody>
 								</table>
-							</div>
-						</div>
-						<!-- end card-body-->
-					</div>
-					<!-- end card-->
+							</div> <!-- end table-responsive-->
+
+						</div> <!-- end card-body-->
+					</div> <!-- end card-->
 				</div>
 				<!-- end col-->
 
@@ -367,303 +358,150 @@
 					<div class="card">
 						<div class="card-body">
 							<div class="dropdown float-end">
-								<a href="#" class="dropdown-toggle arrow-none card-drop p-0" data-bs-toggle="dropdown" aria-expanded="false">
+								<a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
 									<i class="mdi mdi-dots-vertical"></i>
 								</a>
 								<div class="dropdown-menu dropdown-menu-end">
-									<a href="javascript:void(0);" class="dropdown-item">Refresh Report</a>
-									<a href="javascript:void(0);" class="dropdown-item">Export Report</a>
+									<!-- item-->
+									<a href="javascript:void(0);" class="dropdown-item">Settings</a>
+									<!-- item-->
+									<a href="javascript:void(0);" class="dropdown-item">Action</a>
 								</div>
 							</div>
-							<h4 class="header-title">
-								Sessions by Browser
-							</h4>
+							<h4 class="header-title mb-4">Recent Leads</h4>
 
-							<div id="sessions-browser" class="apex-charts mt-3" data-colors="#727cf5"></div>
+							<div class="d-flex align-items-start">
+								<img class="me-3 rounded-circle" src="public/img/users/avatar-2.jpg" width="40" alt="Generic placeholder image">
+								<div class="w-100 overflow-hidden">
+									<span class="badge badge-warning-lighten float-end">Cold lead</span>
+									<h5 class="mt-0 mb-1">Risa Pearson</h5>
+									<span class="font-13">richard.john@mail.com</span>
+								</div>
+							</div>
+
+							<div class="d-flex align-items-start mt-3">
+								<img class="me-3 rounded-circle" src="public/img/users/avatar-3.jpg" width="40" alt="Generic placeholder image">
+								<div class="w-100 overflow-hidden">
+									<span class="badge badge-danger-lighten float-end">Lost lead</span>
+									<h5 class="mt-0 mb-1">Margaret D. Evans</h5>
+									<span class="font-13">margaret.evans@rhyta.com</span>
+								</div>
+							</div>
+
+							<div class="d-flex align-items-start mt-3">
+								<img class="me-3 rounded-circle" src="public/img/users/avatar-4.jpg" width="40" alt="Generic placeholder image">
+								<div class="w-100 overflow-hidden">
+									<span class="badge badge-success-lighten float-end">Won lead</span>
+									<h5 class="mt-0 mb-1">Bryan J. Luellen</h5>
+									<span class="font-13">bryuellen@dayrep.com</span>
+								</div>
+							</div>
+
+							<div class="d-flex align-items-start mt-3">
+								<img class="me-3 rounded-circle" src="public/img/users/avatar-5.jpg" width="40" alt="Generic placeholder image">
+								<div class="w-100 overflow-hidden">
+									<span class="badge badge-warning-lighten float-end">Cold lead</span>
+									<h5 class="mt-0 mb-1">Kathryn S. Collier</h5>
+									<span class="font-13">collier@jourrapide.com</span>
+								</div>
+							</div>
+
+							<div class="d-flex align-items-start mt-3">
+								<img class="me-3 rounded-circle" src="public/img/users/avatar-1.jpg" width="40" alt="Generic placeholder image">
+								<div class="w-100 overflow-hidden">
+									<span class="badge badge-warning-lighten float-end">Cold lead</span>
+									<h5 class="mt-0 mb-1">Timothy Kauper</h5>
+									<span class="font-13">thykauper@rhyta.com</span>
+								</div>
+							</div>
+
+							<div class="d-flex align-items-start mt-3">
+								<img class="me-3 rounded-circle" src="public/img/users/avatar-6.jpg" width="40" alt="Generic placeholder image">
+								<div class="w-100 overflow-hidden">
+									<span class="badge badge-success-lighten float-end">Won lead</span>
+									<h5 class="mt-0 mb-1">Zara Raws</h5>
+									<span class="font-13">austin@dayrep.com</span>
+								</div>
+							</div>
+
 						</div>
-						<!-- end card-body-->
-					</div>
-					<!-- end card-->
-				</div>
-				<!-- end col-->
-
-				<div class="col-xl-4 col-lg-6">
-					<div class="card">
-						<div class="card-body">
-							<div class="dropdown float-end">
-								<a href="#" class="dropdown-toggle arrow-none card-drop p-0" data-bs-toggle="dropdown" aria-expanded="false">
-									<i class="mdi mdi-dots-vertical"></i>
-								</a>
-								<div class="dropdown-menu dropdown-menu-end">
-									<a href="javascript:void(0);" class="dropdown-item">Refresh Report</a>
-									<a href="javascript:void(0);" class="dropdown-item">Export Report</a>
-								</div>
-							</div>
-							<h4 class="header-title">
-								Sessions by Operating System
-							</h4>
-
-							<div id="sessions-os" class="apex-charts mt-3" data-colors="#727cf5,#0acf97,#fa5c7c,#ffbc00"></div>
-
-							<div class="row text-center mt-2">
-								<div class="col-6">
-									<h4 class="fw-normal">
-										<span>6,510</span>
-									</h4>
-									<p class="text-muted mb-0">
-										Online System
-									</p>
-								</div>
-								<div class="col-6">
-									<h4 class="fw-normal">
-										<span>2,031</span>
-									</h4>
-									<p class="text-muted mb-0">
-										Offline System
-									</p>
-								</div>
-							</div>
-						</div>
-						<!-- end card-body-->
+						<!-- end card-body -->
 					</div>
 					<!-- end card-->
 				</div>
 				<!-- end col-->
 			</div>
-			<!-- end row -->
+			<!-- end row-->
+		</div> <!-- container -->
 
-			<div class="row">
-				<div class="col-xl-4 col-lg-6">
-					<div class="card">
-						<div class="card-body">
-							<a href="" class="p-0 float-end">Export
-								<i class="mdi mdi-download ms-1"></i></a>
-							<h4 class="header-title mt-1 mb-3">
-								Channels
-							</h4>
-
-							<div class="table-responsive">
-								<table class="table table-sm table-centered mb-0 font-14">
-									<thead class="table-light">
-										<tr>
-											<th>Channel</th>
-											<th>Visits</th>
-											<th style="width: 40%"></th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Direct</td>
-											<td>2,050</td>
-											<td>
-												<div class="progress" style="
-                                                                    height: 3px;
-                                                                ">
-													<div class="progress-bar" role="progressbar" style="
-                                                                        width: 65%;
-                                                                        height: 20px;
-                                                                    " aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>Organic Search</td>
-											<td>1,405</td>
-											<td>
-												<div class="progress" style="
-                                                                    height: 3px;
-                                                                ">
-													<div class="progress-bar bg-info" role="progressbar" style="
-                                                                        width: 45%;
-                                                                        height: 20px;
-                                                                    " aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>Refferal</td>
-											<td>750</td>
-											<td>
-												<div class="progress" style="
-                                                                    height: 3px;
-                                                                ">
-													<div class="progress-bar bg-warning" role="progressbar" style="
-                                                                        width: 30%;
-                                                                        height: 20px;
-                                                                    " aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>Social</td>
-											<td>540</td>
-											<td>
-												<div class="progress" style="
-                                                                    height: 3px;
-                                                                ">
-													<div class="progress-bar bg-danger" role="progressbar" style="
-                                                                        width: 25%;
-                                                                        height: 20px;
-                                                                    " aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<!-- end table-responsive-->
-						</div>
-						<!-- end card-body-->
-					</div>
-					<!-- end card-->
-				</div>
-				<!-- end col-->
-
-				<div class="col-xl-4 col-lg-6">
-					<div class="card">
-						<div class="card-body">
-							<a href="" class="p-0 float-end">Export
-								<i class="mdi mdi-download ms-1"></i></a>
-							<h4 class="header-title mt-1 mb-3">
-								Social Media Traffic
-							</h4>
-
-							<div class="table-responsive">
-								<table class="table table-sm table-centered mb-0 font-14">
-									<thead class="table-light">
-										<tr>
-											<th>Network</th>
-											<th>Visits</th>
-											<th style="width: 40%"></th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Facebook</td>
-											<td>2,250</td>
-											<td>
-												<div class="progress" style="
-                                                                    height: 3px;
-                                                                ">
-													<div class="progress-bar" role="progressbar" style="
-                                                                        width: 65%;
-                                                                        height: 20px;
-                                                                    " aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>Instagram</td>
-											<td>1,501</td>
-											<td>
-												<div class="progress" style="
-                                                                    height: 3px;
-                                                                ">
-													<div class="progress-bar" role="progressbar" style="
-                                                                        width: 45%;
-                                                                        height: 20px;
-                                                                    " aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>Twitter</td>
-											<td>750</td>
-											<td>
-												<div class="progress" style="
-                                                                    height: 3px;
-                                                                ">
-													<div class="progress-bar" role="progressbar" style="
-                                                                        width: 30%;
-                                                                        height: 20px;
-                                                                    " aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>LinkedIn</td>
-											<td>540</td>
-											<td>
-												<div class="progress" style="
-                                                                    height: 3px;
-                                                                ">
-													<div class="progress-bar" role="progressbar" style="
-                                                                        width: 25%;
-                                                                        height: 20px;
-                                                                    " aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<!-- end table-responsive-->
-						</div>
-						<!-- end card-body-->
-					</div>
-					<!-- end card-->
-				</div>
-				<!-- end col-->
-
-				<div class="col-xl-4 col-lg-12">
-					<div class="card">
-						<div class="card-body">
-							<a href="" class="p-0 float-end">Export
-								<i class="mdi mdi-download ms-1"></i></a>
-							<h4 class="header-title mt-1 mb-3">
-								Engagement Overview
-							</h4>
-
-							<div class="table-responsive">
-								<table class="table table-sm table-centered mb-0 font-14">
-									<thead class="table-light">
-										<tr>
-											<th>Duration (Secs)</th>
-											<th style="width: 30%">
-												Sessions
-											</th>
-											<th style="width: 30%">
-												Views
-											</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>0-30</td>
-											<td>2,250</td>
-											<td>4,250</td>
-										</tr>
-										<tr>
-											<td>31-60</td>
-											<td>1,501</td>
-											<td>2,050</td>
-										</tr>
-										<tr>
-											<td>61-120</td>
-											<td>750</td>
-											<td>1,600</td>
-										</tr>
-										<tr>
-											<td>121-240</td>
-											<td>540</td>
-											<td>1,040</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<!-- end table-responsive-->
-						</div>
-						<!-- end card-body-->
-					</div>
-					<!-- end card-->
-				</div>
-				<!-- end col-->
-			</div>
-			<!-- end row -->
-		</div>
-		<!-- container -->
-	</div>
-	<!-- content -->
+	</div> <!-- content -->
 
 	<script src="public/js/vendor/Chart.bundle.min.js"></script>
 	<script src="public/js/vendor/apexcharts.min.js"></script>
+	<!-- Todo js -->
+	<!-- <script src="public/js/ui/component.todo.js"></script> -->
+	<!-- demo app -->
+	<!-- <script src="public/js/pages/demo.dashboard-crm.js"></script> -->
+	<!-- end demo js-->
+
+	<script>
+		$(document).ready(function() {
+			select_class();
+			select_test_code();
+
+			colors = ['#727cf5', '#0acf97', '#fa5c7c', '#ffbc00'];
+			(dataColors = $('#dash-campaigns-chart').data('colors')) &&
+			(colors = dataColors.split(','));
+
+			var options = {
+					chart: {
+						height: 304,
+						type: 'radialBar'
+					},
+					colors: colors,
+					series: [14, 48, 47, 5],
+					labels: ['Tốt', 'Khá', 'Trung Bình', 'Yếu'],
+					plotOptions: {
+						radialBar: {
+							track: {
+								margin: 8
+							}
+						}
+					},
+				},
+				chart = new ApexCharts(
+					document.querySelector('#dash-campaigns-chart'),
+					options
+				);
+
+			chart.render();
+		});
+
+		function list_check() {
+			var class_id = $('#class_id').val();
+			var test_code = $('#test_code').val();
+
+			$.ajax({
+				url: 'index.php?action=get_charts_by_class_and_test_code',
+				data: {
+					class_id,
+					test_code
+				},
+				type: 'POST',
+				dataType: 'json',
+				async: true,
+				cache: false,
+				success: function(response) {
+					var percent_good_student = response[0].count_good_student;
+					var percent_rather_student = response[1].count_rather_student;
+					var percent_medium_student = response[2].count_medium_student;
+					var percent_least_student = response[3].count_least_student;
+
+					$('#good_student').html(percent_good_student);
+					$('#rather_student').html(percent_rather_student);
+					$('#medium_student').html(percent_medium_student);
+					$('#least_student').html(percent_least_student);
+				}
+			});
+		}
+	</script>

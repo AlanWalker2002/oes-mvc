@@ -24,6 +24,7 @@
 <script>
     function changeIcon(id) {
         $('.arrow-id-' + id).children('i').toggleClass('mdi-arrow-down-drop-circle mdi-arrow-up-drop-circle');
+        $('#slide-' + id).slideToggle();
     }
 </script>
 

@@ -235,12 +235,12 @@ class StudentController
 			$list_quest = $model->get_quest_of_test($test_code);
 			foreach ($list_quest as $quest) {
 				$array = array();
-				$array[0] = $quest->answer_a;
-				$array[1] = $quest->answer_b;
-				$array[2] = $quest->answer_c;
-				$array[3] = $quest->answer_d;
+				$array[0] = strip_tags(explode('.', $quest->answer_a)[0]);
+				$array[1] = strip_tags(explode('.', $quest->answer_b)[0]);
+				$array[2] = strip_tags(explode('.', $quest->answer_c)[0]);
+				$array[3] = strip_tags(explode('.', $quest->answer_d)[0]);
 				// Xếp thứ tự ngẫu nhiên của các phần tử trong mảng:
-				shuffle($array);
+				// shuffle($array);
 				$id = rand(1, time()) + rand(100000, 999999);
 				$time = $model->get_test($test_code)->time_to_do . ':00';
 				$model->add_student_quest($id, $this->info['id'], $test_code, $quest->question_id, $array[0], $array[1], $array[2], $array[3]);

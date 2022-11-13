@@ -10,7 +10,7 @@ class Admin extends Database
     public function get_admin_info($username)
     {
         $sql = "
-        SELECT admins.id,username,avatar,email,admins.name,last_login,birthday,permissions.name as permission_detail,genders.name as gender_detail FROM admins
+        SELECT admins.id,username,avatar,email,admins.name,last_login,birthday,permission_id,permissions.name as permission_detail,genders.name as gender_detail FROM admins
         INNER JOIN permissions ON admins.permission_id = permissions.id
         INNER JOIN genders ON admins.gender_id = genders.id
         WHERE username = '$username'";
@@ -368,9 +368,9 @@ class Admin extends Database
         return $this->load_rows();
     }
 
-    public function add_question($unit, $question_content, $answer_a, $answer_b, $answer_c, $answer_d, $correct_answer, $grade_id, $subject_id)
+    public function add_question($unit, $question_content, $answer_a, $answer_b, $answer_c, $answer_d, $correct_answer, $explanation, $grade_id, $subject_id)
     {
-        $sql = "INSERT INTO questions (unit,question_content,answer_a,answer_b,answer_c,answer_d,correct_answer,grade_id,subject_id) VALUES ($unit,'$question_content','$answer_a','$answer_b','$answer_c','$answer_d','$correct_answer',$grade_id,$subject_id)";
+        $sql = "INSERT INTO questions (unit,question_content,answer_a,answer_b,answer_c,answer_d,correct_answer,explanation,grade_id,subject_id) VALUES ($unit,'$question_content','$answer_a','$answer_b','$answer_c','$answer_d','$correct_answer','$explanation',$grade_id,$subject_id)";
         $this->set_query($sql);
         return $this->execute_return_status();
     }
@@ -542,11 +542,59 @@ class Admin extends Database
         return $this->load_rows();
     }
 
+    public function get_list_test_codes()
+    {
+        $sql = "SELECT test_code FROM tests";
+        $this->set_query($sql);
+        return $this->load_rows();
+    }
+
     public function get_test_score($test_code)
     {
-        $sql = "SELECT * FROM `scores` INNER JOIN students ON scores.student_id = students.student_id 
-        INNER JOIN classes ON students.class_id = classes.class_id
+        $sql = "SELECT * FROM scores 
+        INNER JOIN students ON scores.student_id = students.id 
+        INNER JOIN classes ON students.class_id = classes.id
         WHERE test_code = '$test_code'";
+        $this->set_query($sql);
+        return $this->load_rows();
+    }
+
+    public function get_count_student_by_good($class_id, $test_code)
+    {
+        $sql = "SELECT COUNT(students.class_id) as count_good_student FROM scores 
+        INNER JOIN students ON scores.student_id = students.id 
+        INNER JOIN classes ON students.class_id = classes.id
+        WHERE students.class_id = $class_id AND test_code = '$test_code' AND score_number > 8";
+        $this->set_query($sql);
+        return $this->load_rows();
+    }
+
+    public function get_count_student_by_rather($class_id, $test_code)
+    {
+        $sql = "SELECT COUNT(students.class_id) as count_rather_student FROM scores 
+        INNER JOIN students ON scores.student_id = students.id 
+        INNER JOIN classes ON students.class_id = classes.id
+        WHERE students.class_id = $class_id AND test_code = '$test_code' AND score_number >= 6.5 AND score_number < 8";
+        $this->set_query($sql);
+        return $this->load_rows();
+    }
+
+    public function get_count_student_by_medium($class_id, $test_code)
+    {
+        $sql = "SELECT COUNT(students.class_id) as count_medium_student FROM scores 
+        INNER JOIN students ON scores.student_id = students.id 
+        INNER JOIN classes ON students.class_id = classes.id
+        WHERE students.class_id = $class_id AND test_code = '$test_code' AND score_number >= 5 AND score_number < 6.5";
+        $this->set_query($sql);
+        return $this->load_rows();
+    }
+
+    public function get_count_student_by_least($class_id, $test_code)
+    {
+        $sql = "SELECT COUNT(students.class_id) as count_least_student FROM scores 
+        INNER JOIN students ON scores.student_id = students.id 
+        INNER JOIN classes ON students.class_id = classes.id
+        WHERE students.class_id = $class_id AND test_code = '$test_code' AND score_number < 5";
         $this->set_query($sql);
         return $this->load_rows();
     }
@@ -568,7 +616,7 @@ class Admin extends Database
 
     public function get_total_student()
     {
-        $sql = "SELECT COUNT(student_id) as total FROM students";
+        $sql = "SELECT COUNT(id) as total FROM students";
         $this->set_query($sql);
         return $this->load_row()->total;
     }
@@ -582,35 +630,35 @@ class Admin extends Database
 
     public function get_total_teacher()
     {
-        $sql = "SELECT COUNT(teacher_id) as total FROM teachers";
+        $sql = "SELECT COUNT(id) as total FROM teachers";
         $this->set_query($sql);
         return $this->load_row()->total;
     }
 
     public function get_total_class()
     {
-        $sql = "SELECT COUNT(class_id) as total FROM classes";
+        $sql = "SELECT COUNT(id) as total FROM classes";
         $this->set_query($sql);
         return $this->load_row()->total;
     }
 
     public function get_total_subject()
     {
-        $sql = "SELECT COUNT(subject_id) as total FROM subjects";
+        $sql = "SELECT COUNT(id) as total FROM subjects";
         $this->set_query($sql);
         return $this->load_row()->total;
     }
 
     public function get_total_question()
     {
-        $sql = "SELECT COUNT(question_id) as total FROM questions";
+        $sql = "SELECT COUNT(id) as total FROM questions";
         $this->set_query($sql);
         return $this->load_row()->total;
     }
 
     public function get_total_grade()
     {
-        $sql = "SELECT COUNT(grade_id) as total FROM grades";
+        $sql = "SELECT COUNT(id) as total FROM grades";
         $this->set_query($sql);
         return $this->load_row()->total;
     }

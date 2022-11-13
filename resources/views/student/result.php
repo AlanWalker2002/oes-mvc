@@ -67,7 +67,7 @@
                 ?>
                     <li class="side-nav-item">
                         <?php
-                        if ($result[$i]->student_answer == $result[$i]->correct_answer) {
+                        if (trim($result[$i]->student_answer) == trim($result[$i]->correct_answer)) {
                         ?>
                             <a href="#quest-<?= ($i + 1) ?>" class="side-nav-link">
                                 <i class="mdi mdi-format-list-checkbox"></i>
@@ -165,19 +165,12 @@
                             <div class="col-md-12" id="quest-<?= ($i + 1) ?>">
                                 <div class="accordion" id="accordion-<?= ($i + 1) ?>">
                                     <div class="card">
-                                        <div class="card-header flex-full">
-                                            <h5>Câu <?= ($i + 1) ?></h5>
-                                            <a class="custom-accordion-title flex pt-2 pb-2 arrow-id-<?= ($i + 1) ?>" data-bs-toggle="collapse" onclick="changeIcon(<?= $i + 1 ?>)" href="#collapse-<?= $i + 1 ?>" aria-expanded="true" aria-controls="collapse-<?= $i + 1 ?>">
-                                                <h5 class="me-2">Lời giải chi tiết</h5>
-                                                <i class="mdi mdi-arrow-up-drop-circle fs-18"></i>
-                                            </a>
-                                        </div>
-                                        <div class="card-body">
+                                        <div class="card-body underline">
                                             <h5 class="card-title">
-                                                <?= $result[$i]->question_content ?>
+                                                Câu <?= ($i + 1) ?>: <?= $result[$i]->question_content ?>
                                             </h5>
                                             <div class="quest-content flex">
-                                                <div class="mt-2 me-5">
+                                                <div class="mt-2 me-5 fs-16">
                                                     <div class="form-check flex">
                                                         <?php
                                                         if (trim($result[$i]->student_answer) == trim($result[$i]->answer_a) && trim($result[$i]->student_answer) == trim($result[$i]->correct_answer)) {
@@ -185,8 +178,7 @@
                                                             <input class="form-check-input me-1" name="<?= $result[$i]->question_id ?>" type="radio" checked disabled />
 
                                                             <label class="form-check-label flex text-green" for="customRadio1">
-                                                                <i class="mdi mdi-alpha-a-circle me-2 fs-24"></i>
-                                                                <?= $result[$i]->answer_a ?>
+                                                                <?= $result[$i]->answer_qa ?>
                                                             </label>
                                                         <?php } else { ?>
                                                             <?php
@@ -195,21 +187,18 @@
                                                                 <input class="form-check-input me-1" name="<?= $result[$i]->question_id ?>" type="radio" checked disabled />
 
                                                                 <label class="form-check-label flex text-red" for="customRadio1">
-                                                                    <i class="mdi mdi-alpha-a-circle me-2 fs-24"></i>
-                                                                    <?= $result[$i]->answer_a ?>
+                                                                    <?= $result[$i]->answer_qa ?>
                                                                 </label>
                                                             <?php } else { ?>
                                                                 <?php if (trim($result[$i]->answer_a) == trim($result[$i]->correct_answer)) { ?>
                                                                     <input class="form-check-input me-1" name="<?= $result[$i]->question_id ?>" type="radio" checked disabled />
                                                                     <label class="form-check-label flex text-green" for="customRadio1">
-                                                                        <i class="mdi mdi-alpha-a-circle me-2 fs-24"></i>
-                                                                        <?= $result[$i]->answer_a ?>
+                                                                        <?= $result[$i]->answer_qa ?>
                                                                     </label>
                                                                 <?php } else { ?>
                                                                     <input class="form-check-input me-1" name="<?= $result[$i]->question_id ?>" type="radio" disabled />
                                                                     <label class="form-check-label flex" for="customRadio1">
-                                                                        <i class="mdi mdi-alpha-a-circle me-2 fs-24"></i>
-                                                                        <?= $result[$i]->answer_a ?>
+                                                                        <?= $result[$i]->answer_qa ?>
                                                                     </label>
                                                                 <?php } ?>
                                                             <?php } ?>
@@ -222,8 +211,7 @@
                                                             <input class="form-check-input me-1" name="<?= $result[$i]->question_id ?>" type="radio" checked disabled />
 
                                                             <label class="form-check-label flex text-green" for="customRadio1">
-                                                                <i class="mdi mdi-alpha-c-circle me-2 fs-24"></i>
-                                                                <?= $result[$i]->answer_c ?>
+                                                                <?= $result[$i]->answer_qc ?>
                                                             </label>
                                                         <?php } else { ?>
                                                             <?php
@@ -232,21 +220,18 @@
                                                                 <input class="form-check-input me-1" name="<?= $result[$i]->question_id ?>" type="radio" checked disabled />
 
                                                                 <label class="form-check-label flex text-red" for="customRadio1">
-                                                                    <i class="mdi mdi-alpha-c-circle me-2 fs-24"></i>
-                                                                    <?= $result[$i]->answer_c ?>
+                                                                    <?= $result[$i]->answer_qc ?>
                                                                 </label>
                                                             <?php } else { ?>
                                                                 <?php if (trim($result[$i]->answer_c) == trim($result[$i]->correct_answer)) { ?>
                                                                     <input class="form-check-input me-1" name="<?= $result[$i]->question_id ?>" type="radio" checked disabled />
                                                                     <label class="form-check-label flex text-green" for="customRadio1">
-                                                                        <i class="mdi mdi-alpha-c-circle me-2 fs-24"></i>
-                                                                        <?= $result[$i]->answer_c ?>
+                                                                        <?= $result[$i]->answer_qc ?>
                                                                     </label>
                                                                 <?php } else { ?>
                                                                     <input class="form-check-input me-1" name="<?= $result[$i]->question_id ?>" type="radio" disabled />
                                                                     <label class="form-check-label flex" for="customRadio1">
-                                                                        <i class="mdi mdi-alpha-c-circle me-2 fs-24"></i>
-                                                                        <?= $result[$i]->answer_c ?>
+                                                                        <?= $result[$i]->answer_qc ?>
                                                                     </label>
                                                                 <?php } ?>
                                                             <?php } ?>
@@ -254,7 +239,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="mt-2">
+                                                <div class="mt-2 fs-16">
                                                     <div class="form-check flex">
                                                         <?php
                                                         if (trim($result[$i]->student_answer) == trim($result[$i]->answer_b) && trim($result[$i]->student_answer) == trim($result[$i]->correct_answer)) {
@@ -262,8 +247,7 @@
                                                             <input class="form-check-input me-1" name="<?= $result[$i]->question_id ?>" type="radio" checked disabled />
 
                                                             <label class="form-check-label flex text-green" for="customRadio1">
-                                                                <i class="mdi mdi-alpha-b-circle me-2 fs-24"></i>
-                                                                <?= $result[$i]->answer_b ?>
+                                                                <?= $result[$i]->answer_qb ?>
                                                             </label>
                                                         <?php } else { ?>
                                                             <?php
@@ -272,21 +256,18 @@
                                                                 <input class="form-check-input me-1" name="<?= $result[$i]->question_id ?>" type="radio" checked disabled />
 
                                                                 <label class="form-check-label flex text-red" for="customRadio1">
-                                                                    <i class="mdi mdi-alpha-b-circle me-2 fs-24"></i>
-                                                                    <?= $result[$i]->answer_b ?>
+                                                                    <?= $result[$i]->answer_qb ?>
                                                                 </label>
                                                             <?php } else { ?>
                                                                 <?php if (trim($result[$i]->answer_b) == trim($result[$i]->correct_answer)) { ?>
                                                                     <input class="form-check-input me-1" name="<?= $result[$i]->question_id ?>" type="radio" checked disabled />
                                                                     <label class="form-check-label flex text-green" for="customRadio1">
-                                                                        <i class="mdi mdi-alpha-b-circle me-2 fs-24"></i>
-                                                                        <?= $result[$i]->answer_b ?>
+                                                                        <?= $result[$i]->answer_qb ?>
                                                                     </label>
                                                                 <?php } else { ?>
                                                                     <input class="form-check-input me-1" name="<?= $result[$i]->question_id ?>" type="radio" disabled />
                                                                     <label class="form-check-label flex" for="customRadio1">
-                                                                        <i class="mdi mdi-alpha-b-circle me-2 fs-24"></i>
-                                                                        <?= $result[$i]->answer_b ?>
+                                                                        <?= $result[$i]->answer_qb ?>
                                                                     </label>
                                                                 <?php } ?>
                                                             <?php } ?>
@@ -299,8 +280,7 @@
                                                             <input class="form-check-input me-1" name="<?= $result[$i]->question_id ?>" type="radio" checked disabled />
 
                                                             <label class="form-check-label flex text-green" for="customRadio1">
-                                                                <i class="mdi mdi-alpha-d-circle me-2 fs-24"></i>
-                                                                <?= $result[$i]->answer_d ?>
+                                                                <?= $result[$i]->answer_qd ?>
                                                             </label>
                                                         <?php } else { ?>
                                                             <?php
@@ -309,21 +289,18 @@
                                                                 <input class="form-check-input me-1" name="<?= $result[$i]->question_id ?>" type="radio" checked disabled />
 
                                                                 <label class="form-check-label flex text-red" for="customRadio1">
-                                                                    <i class="mdi mdi-alpha-d-circle me-2 fs-24"></i>
-                                                                    <?= $result[$i]->answer_d ?>
+                                                                    <?= $result[$i]->answer_qd ?>
                                                                 </label>
                                                             <?php } else { ?>
                                                                 <?php if (trim($result[$i]->answer_d) == trim($result[$i]->correct_answer)) { ?>
                                                                     <input class="form-check-input me-1" name="<?= $result[$i]->question_id ?>" type="radio" checked disabled />
                                                                     <label class="form-check-label flex text-green" for="customRadio1">
-                                                                        <i class="mdi mdi-alpha-d-circle me-2 fs-24"></i>
-                                                                        <?= $result[$i]->answer_d ?>
+                                                                        <?= $result[$i]->answer_qd ?>
                                                                     </label>
                                                                 <?php } else { ?>
                                                                     <input class="form-check-input me-1" name="<?= $result[$i]->question_id ?>" type="radio" disabled />
                                                                     <label class="form-check-label flex" for="customRadio1">
-                                                                        <i class="mdi mdi-alpha-d-circle me-2 fs-24"></i>
-                                                                        <?= $result[$i]->answer_d ?>
+                                                                        <?= $result[$i]->answer_qd ?>
                                                                     </label>
                                                                 <?php } ?>
                                                             <?php } ?>
@@ -333,10 +310,22 @@
                                             </div>
                                         </div>
                                         <!-- end card-body-->
-                                        <div id="collapse-<?= $i + 1 ?>" class="collapse" aria-labelledby="heading-<?= $i + 1 ?>" data-bs-parent="#accordion-<?= ($i + 1) ?>">
-                                            <div class="card-footer">
-                                                a
-                                            </div>
+                                        <div class="flex-full me-3 ms-3">
+                                            <h5 class="me-2">
+                                                <i class="uil-slack-alt"></i>
+                                                Lời giải chi tiết
+                                            </h5>
+                                            <a href="#" class="custom-accordion-title flex pt-2 pb-2 arrow-id-<?= ($i + 1) ?>" onclick="changeIcon(<?= $i + 1 ?>)">
+                                                <i class="mdi mdi-arrow-up-drop-circle fs-18"></i>
+                                            </a>
+                                        </div>
+
+                                        <div class="card-footer none" id="slide-<?= ($i + 1) ?>">
+                                            <p>
+                                                <?php echo $result[$i]->explanation ?>
+                                            </p>
+
+                                            <?php echo 'Đáp án đúng ' . $result[$i]->correct_answer ?>
                                         </div>
                                     </div> <!-- end card-->
                                 </div>
@@ -391,7 +380,5 @@
     <!-- ============================================================== -->
     <!-- End Page content -->
     <!-- ============================================================== -->
-
-
 </div>
 <!-- END wrapper -->

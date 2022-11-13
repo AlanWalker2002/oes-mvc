@@ -17,6 +17,7 @@ class AdminController
     public function __construct()
     {
         $user_info = $this->get_admin_info($_SESSION['username']);
+        $this->info['permission_id'] = $user_info->permission_id;
         $this->info['id'] = $user_info->id;
         $this->update_last_login($this->info['id']);
         $this->info['username'] = $user_info->username;
@@ -989,10 +990,10 @@ class AdminController
 
     // === 8. QUESTION ===
     // == 8.1 CREATE ==
-    public function add_question($unit, $question_content, $answer_a, $answer_b, $answer_c, $answer_d, $correct_answer, $grade_id, $subject_id)
+    public function add_question($unit, $question_content, $answer_a, $answer_b, $answer_c, $answer_d, $correct_answer, $explanation, $grade_id, $subject_id)
     {
         $add_question = new Admin();
-        return $add_question->add_question($unit, $question_content, $answer_a, $answer_b, $answer_c, $answer_d, $correct_answer, $grade_id, $subject_id);
+        return $add_question->add_question($unit, $question_content, $answer_a, $answer_b, $answer_c, $answer_d, $correct_answer, $explanation, $grade_id, $subject_id);
     }
 
     public function check_add_question()
@@ -1005,6 +1006,7 @@ class AdminController
         $answer_c = $_POST['answer_c'];
         $answer_d = $_POST['answer_d'];
         $correct_answer = $_POST['correct_answer'];
+        $explanation = $_POST['explanation'];
         $grade_id = $_POST['grade_id'];
         $subject_id = $_POST['subject_id'];
 
@@ -1012,12 +1014,12 @@ class AdminController
             $result['status_value'] = "Không được bỏ trống các trường nhập!";
             $result['status'] = 0;
         } else {
-            $add = $this->add_question($unit, $question_content, $answer_a, $answer_b, $answer_c, $answer_d, $correct_answer, $grade_id, $subject_id);
+            $add = $this->add_question($unit, $question_content, $answer_a, $answer_b, $answer_c, $answer_d, $correct_answer, $explanation, $grade_id, $subject_id);
             if ($add) {
                 $result['status_value'] = "Thêm thành công!";
                 $result['status'] = 1;
             } else {
-                $result['status_value'] = "Lỗi! Tài khoản đã tồn tại!";
+                $result['status_value'] = "Lỗi! Thêm thất bại!";
                 $return['status'] = 0;
             }
         }
@@ -1049,8 +1051,9 @@ class AdminController
             $answer_c = $sheetData[$i]['E'];
             $answer_d = $sheetData[$i]['F'];
             $correct_answer = $sheetData[$i]['G'];
-            $unit = $sheetData[$i]['H'];
-            $add = $this->add_question($unit, $question_content, $answer_a, $answer_b, $answer_c, $answer_d, $correct_answer, $grade_id, $subject_id);
+            $explanation = $sheetData[$i]['H'];
+            $unit = $sheetData[$i]['I'];
+            $add = $this->add_question($unit, $question_content, $answer_a, $answer_b, $answer_c, $answer_d, $correct_answer, $explanation, $grade_id, $subject_id);
             if ($add)
                 $count++;
             else
@@ -1279,6 +1282,23 @@ class AdminController
         $writer->save('php://output');
     }
 
+    public function get_charts_by_class_and_test_code()
+    {
+        $class_id = $_POST['class_id'];
+        $test_code = $_POST['test_code'];
+
+        $result = array();
+        $model = new Admin();
+
+        $good_count = $model->get_count_student_by_good($class_id, $test_code);
+        $rather_count = $model->get_count_student_by_rather($class_id, $test_code);
+        $medium_count = $model->get_count_student_by_medium($class_id, $test_code);
+        $least_count = $model->get_count_student_by_least($class_id, $test_code);
+
+        array_push($result, $good_count[0], $rather_count[0], $medium_count[0], $least_count[0]);
+        echo json_encode($result);
+    }
+
     public function check_toggle_test_status()
     {
         $result = array();
@@ -1426,57 +1446,71 @@ class AdminController
         echo json_encode($unit->get_list_units($grade_id, $subject_id));
     }
 
+    public function get_list_test_codes()
+    {
+        $list_test_code = new Admin();
+        echo json_encode($list_test_code->get_list_test_codes());
+    }
+
     public function get_dashboard_info()
     {
         $get_total = new Admin();
         $admin = new stdclass();
         $admin->count = $get_total->get_total_admin();
         $admin->name = "Quản Trị Viên";
-        $admin->icon = "support_agent";
+        $admin->icon = "mdi-account-tie";
         $admin->color = "gradient-45deg-light-blue-cyan";
         $admin->actionlink = "show_admins_panel";
+
         $teacher = new stdclass();
         $teacher->count = $get_total->get_total_teacher();
         $teacher->name = "Giáo Viên";
-        $teacher->icon = "people";
+        $teacher->icon = "mdi-account-star";
         $teacher->color = "gradient-45deg-red-pink";
         $teacher->actionlink = "show_teachers_panel";
+
         $student = new stdclass();
         $student->count = $get_total->get_total_student();
         $student->name = "Học Sinh";
-        $student->icon = "person";
+        $student->icon = "mdi-account";
         $student->color = "gradient-45deg-amber-amber";
         $student->actionlink = "show_students_panel";
+
         $grade = new stdclass();
         $grade->count = $get_total->get_total_grade();
         $grade->name = "Khối";
-        $grade->icon = "inventory";
+        $grade->icon = "mdi-server";
         $grade->color = "gradient-45deg-green-teal";
         $grade->actionlink = "show_classes_panel";
+
         $class = new stdclass();
         $class->count = $get_total->get_total_class();
         $class->name = "Lớp";
-        $class->icon = "class";
+        $class->icon = "mdi-book-education";
         $class->color = "gradient-45deg-purple-light-blue";
         $class->actionlink = "show_classes_panel";
+
         $subject = new stdclass();
         $subject->count = $get_total->get_total_subject();
         $subject->name = "Môn Học";
-        $subject->icon = "library_books";
+        $subject->icon = "mdi-text-subject";
         $subject->color = "gradient-45deg-orange-amber";
         $subject->actionlink = "show_subjects_panel";
+
         $question = new stdclass();
         $question->count = $get_total->get_total_question();
         $question->name = "Câu Hỏi";
-        $question->icon = "question_answer";
+        $question->icon = "mdi-comment-question";
         $question->color = "gradient-45deg-purple-deep-orange";
         $question->actionlink = "show_questions_panel";
+
         $test = new stdclass();
         $test->count = $get_total->get_total_test();
-        $test->name = "Bài Thi";
-        $test->icon = "app_registration";
+        $test->name = "Đề Thi";
+        $test->icon = "mdi-clipboard-text";
         $test->color = "gradient-45deg-blue-indigo";
         $test->actionlink = "show_tests_panel";
+
         $total = array($admin, $teacher, $student, $grade, $class, $subject, $question, $test);
         return $total;
     }

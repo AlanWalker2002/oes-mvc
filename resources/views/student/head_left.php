@@ -43,6 +43,10 @@
 			align-items: center;
 		}
 
+		.fs-16 {
+			font-size: 16px;
+		}
+
 		.fs-18 {
 			font-size: 18px;
 		}
@@ -60,8 +64,12 @@
 		}
 
 		p {
-			margin-top: 4px;
+			margin-top: 6px;
 			margin-bottom: 4px;
+		}
+
+		.none {
+			display: none;
 		}
 
 		.simp-custom {
@@ -72,6 +80,14 @@
 
 		.relative {
 			position: relative;
+		}
+
+		.card-title p {
+			display: inline;
+		}
+
+		.underline {
+			border-bottom: 1px solid #eef2f7;
 		}
 
 		#eye {

@@ -5,11 +5,12 @@ $(function () {
 
     $('#add_question').on('click', function () {
         var question_content = CKEDITOR.instances['editor-1'].getData();
-        var correct_answer = CKEDITOR.instances['editor-2'].getData();
+        var explanation = CKEDITOR.instances['editor-2'].getData();
         var answer_a = CKEDITOR.instances['editor-3'].getData();
         var answer_b = CKEDITOR.instances['editor-4'].getData();
         var answer_c = CKEDITOR.instances['editor-5'].getData();
         var answer_d = CKEDITOR.instances['editor-6'].getData();
+        var correct_answer = $('#correct_answer').val();
         var grade_id = $('#grade_id').val();
         var subject_id = $('#subject_id').val();
         var unit = $('#unit').val();
@@ -19,11 +20,12 @@ $(function () {
             url: 'index.php?action=check_add_question',
             data: {
                 question_content: question_content,
-                correct_answer: correct_answer,
+                explanation: explanation,
                 answer_a: answer_a,
                 answer_b: answer_b,
                 answer_c: answer_c,
                 answer_d: answer_d,
+                correct_answer: correct_answer,
                 grade_id: grade_id,
                 subject_id: subject_id,
                 unit: unit,
@@ -133,10 +135,17 @@ function show_list_questions(data) {
                 data[i].grade_detail +
                 '</td>'
         );
-        tr.append('<td class="">' + data[i].answer_a + '</td>');
-        tr.append('<td class="">' + data[i].answer_b + '</td>');
-        tr.append('<td class="">' + data[i].answer_c + '</td>');
-        tr.append('<td class="">' + data[i].answer_d + '</td>');
+        tr.append(
+            '<td class="">' +
+                data[i].answer_a +
+                '<br />' +
+                data[i].answer_b +
+                '<br />' +
+                data[i].answer_c +
+                '<br />' +
+                data[i].answer_d +
+                '</td>'
+        );
         tr.append('<td class="">' + data[i].correct_answer + '</td>');
         tr.append(
             '<td class="">' +
@@ -172,7 +181,7 @@ function show_list_questions(data) {
             },
         },
         aoColumnDefs: [
-            { bSortable: false, aTargets: [0, 9] }, //hide sort icon on header of column 0, 10
+            { bSortable: false, aTargets: [0] }, //hide sort icon on header of column 0, 10
         ],
         aaSorting: [[1, 'asc']], // start to sort data in second column
     });

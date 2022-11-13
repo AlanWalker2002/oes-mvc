@@ -121,6 +121,26 @@ function select_teacher() {
     $.get(url, success);
 }
 
+function select_test_code() {
+    var url = 'index.php?action=get_list_test_codes';
+    var success = function (result) {
+        var json_data = $.parseJSON(result);
+        var sl = $('select[name=test_code]');
+        sl.empty();
+        sl.append('<option value="" selected disabled>Chọn Mã đề</option>');
+        $.each(json_data, function (key, value) {
+            sl.append(
+                '<option value="' +
+                    value.test_code +
+                    '">' +
+                    value.test_code +
+                    '</option>'
+            );
+        });
+    };
+    $.get(url, success);
+}
+
 function select_grade() {
     var url = 'index.php?action=get_list_grades';
     var success = function (result) {
@@ -173,6 +193,9 @@ function select_class(data) {
         var json_data = $.parseJSON(result);
         var sl = $('select[name=class_id]');
         sl.empty();
+        sl.append(
+            sl.append('<option value="" selected disabled>Chọn Lớp</option>')
+        );
         $.each(json_data, function (key, value) {
             sl.append(
                 '<option value="' +
