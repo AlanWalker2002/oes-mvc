@@ -82,10 +82,6 @@
 			position: relative;
 		}
 
-		.card-title p {
-			display: inline;
-		}
-
 		.underline {
 			border-bottom: 1px solid #eef2f7;
 		}

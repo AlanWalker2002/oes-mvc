@@ -315,14 +315,20 @@
                                                 <i class="uil-slack-alt"></i>
                                                 Lời giải chi tiết
                                             </h5>
-                                            <a href="#" class="custom-accordion-title flex pt-2 pb-2 arrow-id-<?= ($i + 1) ?>" onclick="changeIcon(<?= $i + 1 ?>)">
+                                            <a href="#1234" class="custom-accordion-title flex pt-2 pb-2 arrow-id-<?= ($i + 1) ?>" onclick="changeIcon(<?= $i + 1 ?>)">
                                                 <i class="mdi mdi-arrow-up-drop-circle fs-18"></i>
                                             </a>
                                         </div>
 
                                         <div class="card-footer none" id="slide-<?= ($i + 1) ?>">
                                             <p>
-                                                <?php echo $result[$i]->explanation ?>
+                                                <?php
+                                                if ($result[$i]->explanation == 'NULL') {
+                                                    echo '<strong>Chưa cập nhật lời giải</strong>';
+                                                } else {
+                                                    echo $result[$i]->explanation;
+                                                }
+                                                ?>
                                             </p>
 
                                             <?php echo 'Đáp án đúng ' . $result[$i]->correct_answer ?>
