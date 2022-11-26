@@ -54,9 +54,9 @@ class StudentController
 			}
 			$next_page = ($current_page - 1) * $limit;
 			$route->show_head($this->info);
-			$tests = $model->get_list_tests($limit, $next_page);
+			$tests = $model->get_list_tests($limit, $next_page, $_SESSION['class_id']);
 			$scores = $model->get_scores($this->info['id']);
-			$get_all_test = $model->get_all_test();
+			$get_all_test = $model->get_all_test($_SESSION['class_id']);
 			$subjects = $model->get_list_subjects();
 			$grades = $model->get_list_grades();
 			$statuses = $model->get_list_statuses();
@@ -97,9 +97,9 @@ class StudentController
 			$next_page = ($current_page - 1) * $limit;
 
 			$route->show_head($this->info);
-			$tests = $model->get_list_tests_filter($subject_id, $grade_id, $status_id, $limit, $next_page);
+			$tests = $model->get_list_tests_filter($subject_id, $grade_id, $status_id, $limit, $next_page, $_SESSION['class_id']);
 			$scores = $model->get_scores($this->info['id']);
-			$get_all_test_filter = $model->get_all_test_filter($subject_id, $grade_id, $status_id);
+			$get_all_test_filter = $model->get_all_test_filter($subject_id, $grade_id, $status_id, $_SESSION['class_id']);
 			$subjects = $model->get_list_subjects();
 			$grades = $model->get_list_grades();
 			$statuses = $model->get_list_statuses();

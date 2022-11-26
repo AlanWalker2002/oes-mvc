@@ -188,6 +188,88 @@
 			},
 		}
 	});
+
+	$('#scores').DataTable({
+		"language": {
+			sLengthMenu: 'Hiển thị <select class="form-select form-select-sm ms-1 me-1">' +
+				'<option value="10">10</option>' +
+				'<option value="20">20</option>' +
+				'<option value="30">30</option>' +
+				'<option value="40">40</option>' +
+				'<option value="50">50</option>' +
+				'<option value="-1">Tất cả</option>' +
+				'</select> bản ghi',
+			"zeroRecords": "Không tìm thấy",
+			"info": "Hiển thị trang _PAGE_/_PAGES_",
+			"infoEmpty": "Không có dữ liệu",
+			"emptyTable": "Không có dữ liệu",
+			"infoFiltered": "(tìm kiếm trong tất cả _MAX_ mục)",
+			"sSearch": "Tìm kiếm",
+			"paginate": {
+				"first": "Đầu",
+				"last": "Cuối",
+				"next": "Sau",
+				"previous": "Trước"
+			},
+		}
+	});
+
+	$('#testCLass').DataTable({
+		"language": {
+			sLengthMenu: 'Hiển thị <select class="form-select form-select-sm ms-1 me-1">' +
+				'<option value="10">10</option>' +
+				'<option value="20">20</option>' +
+				'<option value="30">30</option>' +
+				'<option value="40">40</option>' +
+				'<option value="50">50</option>' +
+				'<option value="-1">Tất cả</option>' +
+				'</select> bản ghi',
+			"zeroRecords": "Không tìm thấy",
+			"info": "Hiển thị trang _PAGE_/_PAGES_",
+			"infoEmpty": "Không có dữ liệu",
+			"emptyTable": "Không có dữ liệu",
+			"infoFiltered": "(tìm kiếm trong tất cả _MAX_ mục)",
+			"sSearch": "Tìm kiếm",
+			"paginate": {
+				"first": "Đầu",
+				"last": "Cuối",
+				"next": "Sau",
+				"previous": "Trước"
+			},
+		}
+	});
+
+	$('#table_questions').DataTable({
+		language: {
+			sLengthMenu: 'Hiển thị <select class="form-select form-select-sm ms-1 me-1">' +
+				'<option value="10">10</option>' +
+				'<option value="20">20</option>' +
+				'<option value="30">30</option>' +
+				'<option value="40">40</option>' +
+				'<option value="50">50</option>' +
+				'<option value="-1">Tất cả</option>' +
+				'</select> bản ghi',
+			zeroRecords: 'Không tìm thấy',
+			info: 'Hiển thị trang _PAGE_/_PAGES_',
+			infoEmpty: 'Không có dữ liệu',
+			emptyTable: 'Không có dữ liệu',
+			infoFiltered: '(tìm kiếm trong tất cả _MAX_ mục)',
+			sSearch: 'Tìm kiếm',
+			paginate: {
+				first: 'Đầu',
+				last: 'Cuối',
+				next: 'Sau',
+				previous: 'Trước',
+			},
+		},
+		aoColumnDefs: [{
+			bSortable: false,
+			aTargets: [0]
+		}, ],
+		aaSorting: [
+			[1, 'asc']
+		],
+	});
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

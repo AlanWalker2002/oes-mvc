@@ -109,9 +109,10 @@ class AdminController
     {
         $title = 'Trang Quản Lý Câu Hỏi';
         $route = new RAdmin();
+        $model = new Admin();
         $route->show_head($title);
         $route->show_navbar($this->info);
-        $route->show_questions_panel();
+        $route->show_questions_panel($model->get_list_questions());
         $route->show_foot();
     }
 
@@ -1077,10 +1078,10 @@ class AdminController
     }
 
     // == 8.3 UPDATE ==
-    public function edit_question($id, $unit, $question_content, $answer_a, $answer_b, $answer_c, $answer_d, $correct_answer, $grade_id, $subject_id)
+    public function edit_question($id, $unit, $question_content, $answer_a, $answer_b, $answer_c, $answer_d, $correct_answer, $explanation, $grade_id, $subject_id)
     {
         $edit = new Admin();
-        return $edit->edit_question($id, $unit, $question_content, $answer_a, $answer_b, $answer_c, $answer_d, $correct_answer, $grade_id, $subject_id);
+        return $edit->edit_question($id, $unit, $question_content, $answer_a, $answer_b, $answer_c, $answer_d, $correct_answer, $explanation, $grade_id, $subject_id);
     }
 
     public function check_edit_question()
@@ -1094,13 +1095,14 @@ class AdminController
         $answer_c = $_POST['answer_c'];
         $answer_d = $_POST['answer_d'];
         $correct_answer = $_POST['correct_answer'];
+        $explanation = $_POST['explanation'];
         $grade_id = $_POST['grade_id'];
         $subject_id = $_POST['subject_id'];
-        if (empty($unit) || empty($question_content) || empty($answer_a) || empty($answer_b) || empty($answer_c) || empty($answer_d) || empty($correct_answer)) {
+        if (empty($unit) || empty($question_content) || empty($answer_a) || empty($answer_b) || empty($answer_c) || empty($answer_d) || empty($correct_answer) || empty($explanation)) {
             $result['status_value'] = "Không được bỏ trống các trường nhập!";
             $result['status'] = 0;
         } else {
-            $res = $this->edit_question($id, $unit, $question_content, $answer_a, $answer_b, $answer_c, $answer_d, $correct_answer, $grade_id, $subject_id);
+            $res = $this->edit_question($id, $unit, $question_content, $answer_a, $answer_b, $answer_c, $answer_d, $correct_answer, $explanation, $grade_id, $subject_id);
             if (!$res) {
                 $result['status_value'] = "Sửa thất bại!";
                 $result['status'] = 0;
@@ -1126,13 +1128,13 @@ class AdminController
         $id = isset($_POST['id']) ? Htmlspecialchars($_POST['id']) : '';
         $del = $this->del_question($id);
 
-        if ($del) {
+        if (!$del) {
             $result['status_value'] = "Xóa thành công!";
             $result['status'] = 1;
             $result['id'] = $id;
         } else {
             $result['status_value'] = "Không thể xóa!";
-            $result['status'] = 0;
+            $result['status'] = 0;  
             $result['id'] = $id;
         }
         echo json_encode($result);
@@ -1192,6 +1194,7 @@ class AdminController
             $result['status'] = 0;
         } else {
             $add = $this->add_test($test_code, $test_name, $password, $total_questions, $time_to_do, $note, $grade_id, $subject_id);
+
             if ($add) {
                 //Tạo bộ câu hỏi cho đề thi
                 $model = new Admin();
@@ -1235,18 +1238,6 @@ class AdminController
         return $toggle->toggle_test_status($test_code, $status_id);
     }
 
-    // === 10. SCORE ===
-    // == 10.1 READ ==
-    public function test_score()
-    {
-        $route = new RAdmin();
-        $model = new Admin();
-        $test_code = htmlspecialchars($_GET['test_code']);
-        $route->show_head($this->info);
-        $route->show_test_score($model->get_test_score($test_code));
-        $route->show_foot();
-    }
-
     // == 9.7 EXPORT ==
     public function export_score()
     {
@@ -1258,9 +1249,9 @@ class AdminController
         //Create Excel Data
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', 'Danh Sách Điểm Bài Thi ' . $test_code);
+        $sheet->setCellValue('A1', 'Danh Sách Điểm Bài Thi: ' . $test_code);
         $sheet->setCellValue('A3', 'STT');
-        $sheet->setCellValue('B3', 'Tên');
+        $sheet->setCellValue('B3', 'Tên Học Sinh');
         $sheet->setCellValue('C3', 'Tài Khoản');
         $sheet->setCellValue('D3', 'Lớp');
         $sheet->setCellValue('E3', 'Điểm');
@@ -1275,7 +1266,7 @@ class AdminController
 
         //Output File
         header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attactment;filename="danh-sach-diem-' . $test_code . '.xlsx"');
+        header('Content-Disposition: attactment;filename="danh-sach-diem-thuoc-de-' . $test_code . '.xlsx"');
         header('Cache-Control: max-age=0');
 
         $writer = new Xlsx($spreadsheet);
@@ -1311,6 +1302,92 @@ class AdminController
         } else {
             $result['status_value'] = "Không thay đổi trạng thái!";
             $result['status'] = 0;
+        }
+        echo json_encode($result);
+    }
+
+    // === 10. SCORE ===
+    // == 10.1 READ ==
+    public function test_score()
+    {
+        $title = 'Trang Xem Điểm Thi';
+        $route = new RAdmin();
+        $model = new Admin();
+        $test_code = htmlspecialchars($_GET['test_code']);
+        $route->show_head($title);
+        $route->show_navbar($this->info);
+        $route->show_test_score($model->get_test_score($test_code));
+        $route->show_foot();
+    }
+
+    public function test_class()
+    {
+        $title = 'Trang Duyệt lớp';
+        $route = new RAdmin();
+        $model = new Admin();
+        $test_code = htmlspecialchars($_GET['test_code']);
+        $classes = $model->get_list_classes();
+        $class_tests = $model->get_class_test($test_code);
+        $route->show_head($title);
+        $route->show_navbar($this->info);
+        $route->show_test_class($test_code, $classes, $class_tests);
+        $route->show_foot();
+    }
+
+    public function add_test_class($test_code, $class_id)
+    {
+        $add = new Admin();
+        $add->add_test_class($test_code, $class_id);
+    }
+
+    public function add_select_test_class()
+    {
+        $result = array();
+        $list_add = "";
+        $test_code = $_POST['test_code'];
+        $data = $_POST['list_check'];
+        $list_check = explode(',', $data);
+        for ($i = 0; $i < count($list_check) - 1; $i++) {
+            $add = $this->add_test_class($test_code, $list_check[$i]);
+            if (!$add) {
+                $list_add = $list_add . " " . $list_check[$i];
+            }
+        }
+        if ($list_add == '') {
+            $result['status'] = 0;
+            $result['status_value'] = "Thêm thất bại";
+        } else {
+            $result['status'] = 1;
+            $result['status_value'] = "Đã thêm đề vào lớp có ID: " . $list_add;
+        }
+        echo json_encode($result);
+    }
+
+    public function del_test_class($test_code, $class_id)
+    {
+        $del = new Admin();
+        $del->del_test_class($test_code, $class_id);
+    }
+
+    public function delete_select_test_class()
+    {
+        $result = array();
+        $list_del = "";
+        $test_code = $_POST['test_code'];
+        $data = $_POST['list_check'];
+        $list_check = explode(',', $data);
+        for ($i = 0; $i < count($list_check) - 1; $i++) {
+            $del = $this->del_test_class($test_code, $list_check[$i]);
+            if (!$del) {
+                $list_del = $list_del . " " . $list_check[$i];
+            }
+        }
+        if ($list_del == '') {
+            $result['status'] = 1;
+            $result['status_value'] = "Xóa chọn lọc thất bại";
+        } else {
+            $result['status'] = 0;
+            $result['status_value'] = "Đã xóa chọn lọc có mã ID: " . $list_del;
         }
         echo json_encode($result);
     }

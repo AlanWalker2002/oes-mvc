@@ -51,9 +51,9 @@ class RAdmin
         include 'resources/views/admin/students_panel.html';
     }
 
-    public function show_questions_panel()
+    public function show_questions_panel($questions)
     {
-        include 'resources/views/admin/questions_panel.html';
+        include 'resources/views/admin/questions_panel.php';
     }
 
     public function show_subjects_panel()
@@ -73,6 +73,11 @@ class RAdmin
     public function show_test_score($scores)
     {
         include 'resources/views/admin/test_score.php';
+    }
+
+    public function show_test_class($test_code, $classes, $class_tests)
+    {
+        include 'resources/views/admin/test_class.php';
     }
 
     public function show_about()

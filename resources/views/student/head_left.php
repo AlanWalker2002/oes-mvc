@@ -161,6 +161,26 @@
 			border-radius: 50%;
 			box-shadow: 0 0 20px var(--clr), 0 0 60px var(--clr);
 		}
+
+		.button-eye-mobile {
+			border: none;
+			color: currentColor;
+			height: 70px;
+			line-height: 70px;
+			width: 60px;
+			background-color: transparent;
+			font-size: 24px;
+			cursor: pointer;
+			float: left;
+			z-index: 1;
+			position: relative;
+			margin-left: -24px;
+			opacity: 0.8;
+		}
+
+		.button-eye-mobile:hover {
+			opacity: 1;
+		}
 	</style>
 </head>
 

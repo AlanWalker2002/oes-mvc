@@ -344,8 +344,6 @@
 				min_text = 0 + min;
 				$('#minutes').css('color', 'red');
 				$('#seconds').css('color', 'red');
-
-				// toastr.success('Thời gian còn lại' + min_text, 'Success');
 			} else {
 				min_text = min;
 			}

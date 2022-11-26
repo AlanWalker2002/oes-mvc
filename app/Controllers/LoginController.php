@@ -39,6 +39,7 @@ class LoginController
         $password = isset($_POST['password']) ? md5($_POST['password']) : '';
         if (isset($_SESSION['username'])) {
             $user = $this->get_password($_SESSION['username']);
+            $class = $this->get_class($_SESSION['username']);
             if ($password == $user->password) {
                 $result['status_value'] = "🎉 Đăng nhập thành công, chuẩn bị chuyển hưóng...";
                 $result['status'] = 1;
@@ -51,6 +52,7 @@ class LoginController
                 if ($user->permission_id == 3) {
                     $_SESSION['permission'] = "Student";
                 }
+                $_SESSION['class_id'] = $class->class_id;
                 $_SESSION['login'] = true;
             } else {
                 $result['status_value'] = "❌ Sai mật khẩu!";
@@ -64,6 +66,12 @@ class LoginController
     {
         $model = new Login();
         return $model->get_password($username);
+    }
+
+    public function get_class($username)
+    {
+        $model = new Login();
+        return $model->get_class($username);
     }
 
     public function get_username($username)

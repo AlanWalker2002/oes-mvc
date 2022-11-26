@@ -220,6 +220,13 @@ class Admin extends Database
         return $this->load_rows();
     }
 
+    public function get_class_test($test_code)
+    {
+        $sql = "SELECT * FROM class_of_test INNER JOIN classes ON classes.id = class_of_test.class_id WHERE test_code = '$test_code'";
+        $this->set_query($sql);
+        return $this->load_rows();
+    }
+
     public function edit_class($id, $name, $grade_id, $teacher_id)
     {
         $sql = "UPDATE classes SET name='$name', grade_id='$grade_id', teacher_id ='$teacher_id' where id ='$id'";
@@ -375,9 +382,9 @@ class Admin extends Database
         return $this->execute_return_status();
     }
 
-    public function edit_question($id, $unit, $question_content, $answer_a, $answer_b, $answer_c, $answer_d, $correct_answer, $grade_id, $subject_id)
+    public function edit_question($id, $unit, $question_content, $answer_a, $answer_b, $answer_c, $answer_d, $correct_answer, $explanation, $grade_id, $subject_id)
     {
-        $sql = "UPDATE questions set unit ='$unit', question_content='$question_content', answer_a ='$answer_a', answer_b ='$answer_b', answer_c ='$answer_c', answer_d ='$answer_d', correct_answer ='$correct_answer', grade_id='$grade_id', subject_id='$subject_id' where id = '$id'";
+        $sql = "UPDATE questions set unit ='$unit', question_content='$question_content', answer_a ='$answer_a', answer_b ='$answer_b', answer_c ='$answer_c', answer_d ='$answer_d', correct_answer ='$correct_answer', explanation='$explanation', grade_id='$grade_id', subject_id='$subject_id' where id = '$id'";
         $this->set_query($sql);
         return $this->execute_return_status();
     }
@@ -457,6 +464,24 @@ class Admin extends Database
         return $this->load_rows();
     }
 
+    public function add_test_class($test_code, $class_id)
+    {
+        $sql = "SELECT * FROM class_of_test WHERE test_code = '$test_code' AND class_id = '$class_id'";
+        $this->set_query($sql);
+        if ($this->load_row() != '') {
+            return false;
+        }
+        $sql = "INSERT INTO class_of_test (test_code, class_id) VALUES ('$test_code',$class_id)";
+        $this->set_query($sql);
+        return $this->execute_return_status();
+    }
+
+    public function del_test_class($test_code, $class_id)
+    {
+        $sql = "DELETE FROM class_of_test WHERE test_code = '$test_code' AND class_id = '$class_id'";
+        $this->set_query($sql);
+        return $this->execute_return_status();
+    }
 
     // ======================= COMMON ================
     public function update_last_login($id)
@@ -473,6 +498,7 @@ class Admin extends Database
         SELECT name FROM teachers WHERE username = '$data' OR email = '$data'
         UNION
         SELECT name FROM admins WHERE username = '$data' OR email = '$data'";
+
         $this->set_query($sql);
         if ($this->load_row() != '') {
             return false;
@@ -551,7 +577,7 @@ class Admin extends Database
 
     public function get_test_score($test_code)
     {
-        $sql = "SELECT * FROM scores 
+        $sql = "SELECT scores.*, students.name, students.username, classes.name as class_name FROM scores 
         INNER JOIN students ON scores.student_id = students.id 
         INNER JOIN classes ON students.class_id = classes.id
         WHERE test_code = '$test_code'";

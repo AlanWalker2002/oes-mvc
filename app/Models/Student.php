@@ -109,42 +109,51 @@ class Student extends Database
 		return true;
 	}
 
-	public function get_list_tests($limit, $next_page)
+	public function get_list_tests($limit, $next_page, $class_id)
 	{
-		$sql = "SELECT tests.test_code,tests.test_name,tests.password,tests.total_questions,tests.time_to_do,tests.note,grades.name as grade, subjects.name as subject_detail, statuses.id as status_id,statuses.name as status FROM tests
-		INNER JOIN grades ON grades.id = tests.grade_id
-		INNER JOIN subjects ON subjects.id = tests.subject_id
-		INNER JOIN statuses ON statuses.id = tests.status_id LIMIT $limit OFFSET $next_page";
+		$sql = "SELECT tests.test_code,tests.test_name,tests.password,tests.total_questions,tests.time_to_do,tests.note,grades.name as grade, subjects.name as subject_detail, statuses.id as status_id,statuses.name as status, class_id FROM class_of_test 
+		INNER JOIN tests ON tests.test_code = class_of_test.test_code 
+		INNER JOIN grades ON grades.id = tests.grade_id 
+		INNER JOIN subjects ON subjects.id = tests.subject_id 
+		INNER JOIN statuses ON statuses.id = tests.status_id 
+		WHERE class_id = $class_id
+		LIMIT $limit OFFSET $next_page";
 		$this->set_query($sql);
 		return $this->load_rows();
 	}
 
-	public function get_list_tests_filter($subject_id, $grade_id, $status_id, $limit, $next_page)
+	public function get_list_tests_filter($subject_id, $grade_id, $status_id, $limit, $next_page, $class_id)
 	{
-		$sql = "SELECT tests.test_code,tests.test_name,tests.password,tests.total_questions,tests.time_to_do,tests.note,grades.name as grade, subjects.name as subject_detail, statuses.id as status_id,statuses.name as status FROM tests
-		INNER JOIN grades ON grades.id = tests.grade_id
-		INNER JOIN subjects ON subjects.id = tests.subject_id
-		INNER JOIN statuses ON statuses.id = tests.status_id WHERE subject_id = $subject_id AND grade_id = $grade_id AND status_id = $status_id LIMIT $limit OFFSET $next_page";
+		$sql = "SELECT tests.test_code,tests.test_name,tests.password,tests.total_questions,tests.time_to_do,tests.note,grades.name as grade, subjects.name as subject_detail, statuses.id as status_id,statuses.name as status, class_id FROM class_of_test 
+		INNER JOIN tests ON tests.test_code = class_of_test.test_code 
+		INNER JOIN grades ON grades.id = tests.grade_id 
+		INNER JOIN subjects ON subjects.id = tests.subject_id 
+		INNER JOIN statuses ON statuses.id = tests.status_id  
+		WHERE subject_id = $subject_id AND grade_id = $grade_id AND status_id = $status_id AND class_id = $class_id LIMIT $limit OFFSET $next_page";
 		$this->set_query($sql);
 		return $this->load_rows();
 	}
 
-	public function get_all_test()
+	public function get_all_test($class_id)
 	{
-		$sql = "SELECT tests.test_code,tests.test_name,tests.password,tests.total_questions,tests.time_to_do,tests.note,grades.name as grade, subjects.name as subject_detail, statuses.id as status_id,statuses.name as status FROM tests
-		INNER JOIN grades ON grades.id = tests.grade_id
-		INNER JOIN subjects ON subjects.id = tests.subject_id
-		INNER JOIN statuses ON statuses.id = tests.status_id";
+		$sql = "SELECT tests.test_code,tests.test_name,tests.password,tests.total_questions,tests.time_to_do,tests.note,grades.name as grade, subjects.name as subject_detail, statuses.id as status_id,statuses.name as status, class_id FROM class_of_test 
+		INNER JOIN tests ON tests.test_code = class_of_test.test_code 
+		INNER JOIN grades ON grades.id = tests.grade_id 
+		INNER JOIN subjects ON subjects.id = tests.subject_id 
+		INNER JOIN statuses ON statuses.id = tests.status_id 
+		WHERE class_id = $class_id";
 		$this->set_query($sql);
 		return $this->load_rows();
 	}
 
-	public function get_all_test_filter($subject_id, $grade_id, $status_id)
+	public function get_all_test_filter($subject_id, $grade_id, $status_id, $class_id)
 	{
-		$sql = "SELECT tests.test_code,tests.test_name,tests.password,tests.total_questions,tests.time_to_do,tests.note,grades.name as grade, subjects.name as subject_detail, statuses.id as status_id,statuses.name as status FROM tests
-		INNER JOIN grades ON grades.id = tests.grade_id
-		INNER JOIN subjects ON subjects.id = tests.subject_id
-		INNER JOIN statuses ON statuses.id = tests.status_id WHERE subject_id = $subject_id AND grade_id = $grade_id AND status_id = $status_id";
+		$sql = "SELECT tests.test_code,tests.test_name,tests.password,tests.total_questions,tests.time_to_do,tests.note,grades.name as grade, subjects.name as subject_detail, statuses.id as status_id,statuses.name as status, class_id FROM class_of_test 
+		INNER JOIN tests ON tests.test_code = class_of_test.test_code 
+		INNER JOIN grades ON grades.id = tests.grade_id 
+		INNER JOIN subjects ON subjects.id = tests.subject_id 
+		INNER JOIN statuses ON statuses.id = tests.status_id  
+		WHERE subject_id = $subject_id AND grade_id = $grade_id AND status_id = $status_id AND class_id = $class_id";
 		$this->set_query($sql);
 		return $this->load_rows();
 	}

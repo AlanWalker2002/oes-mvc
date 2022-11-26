@@ -28,7 +28,7 @@
             <!--- Sidemenu -->
             <ul class="side-nav">
 
-                <li class="side-nav-title side-nav-item">Kết quả</li>
+                <li class="side-nav-title side-nav-item">Kết quả </li>
 
                 <li class="side-nav-item">
                     <a href="#" class="side-nav-link">
@@ -147,9 +147,16 @@
                         </div>
                     </li>
                 </ul>
+
                 <button class="button-menu-mobile open-left">
                     <i class="mdi mdi-menu"></i>
                 </button>
+
+                <button class="button-eye-mobile" data-bs-toggle="modal" data-bs-target="#abc">
+                    <i class="mdi mdi-eye"></i>
+                </button>
+
+
             </div>
             <!-- end Topbar -->
 
@@ -388,3 +395,38 @@
     <!-- ============================================================== -->
 </div>
 <!-- END wrapper -->
+
+<div id="abc" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true" style="top: 20%">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="standard-modalLabel">Kết quả</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12 mb-2 text-center fs-16">
+                        <i class="mdi mdi-book-education-outline"></i>
+                        <span> Mã Đề: <?= $result[0]->test_code ?> </span>
+                    </div>
+                    <div class="col-lg-12 mb-2 text-center fs-16">
+                        <i class="mdi mdi-scoreboard"></i>
+                        <span> Số điểm: <?= $score->score_number ?> điểm</span>
+                    </div>
+                    <div class="col-lg-12 mb-2 text-center fs-16">
+                        <i class="mdi mdi-bookmark-check"></i>
+                        <span> Đúng <?= $score->score_detail ?> Câu</span>
+                    </div>
+                    <div class="col-lg-12 mb-2 text-center fs-16">
+                        <i class="mdi mdi-bolnisi-cross"></i>
+                        <span> Hoàn Thành Lúc: <?= $score->completion_time ?>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Trở lại</button>
+            </div>
+        </div>
+    </div>
+</div>

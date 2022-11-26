@@ -142,6 +142,11 @@
 			background: white;
 			border-radius: 5px;
 		}
+
+		.page-title-box .page-title-left {
+			float: left;
+			margin-top: 20px;
+		}
 	</style>
 </head>
 

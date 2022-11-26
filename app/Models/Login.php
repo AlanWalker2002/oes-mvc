@@ -26,6 +26,13 @@ class Login extends Database
         return $this->load_row();
     }
 
+    public function get_class($username)
+    {
+        $sql = "SELECT class_id FROM students WHERE username = '$username' OR email = '$username'";
+        $this->set_query($sql);
+        return $this->load_row();
+    }
+
     public function reset_password($username)
     {
         $sql = "SELECT name,email,password,permission_id FROM students WHERE username = '$username' OR email = '$username'

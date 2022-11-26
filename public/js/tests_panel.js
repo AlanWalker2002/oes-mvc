@@ -43,7 +43,7 @@ function show_list_tests(data) {
         }
 
         var tr = $('<tr class="" id="test-' + data[i].test_code + '"></tr>');
-        tr.append('<td class="">' + $stt++ + '</td>');
+        tr.append('<td class=""></td>');
         tr.append('<td class="">' + data[i].test_name + '</td>');
         tr.append('<td class="">' + data[i].test_code + '</td>');
         tr.append('<td class="">' + data[i].subject_detail + '</td>');
@@ -68,6 +68,7 @@ function show_list_tests(data) {
         );
         tr.append(
             '<td class="">' +
+                test_class_button(data[i]) +
                 toggle_status_button(data[i]) +
                 test_detail_button(data[i]) +
                 test_score_button(data[i]) +
@@ -117,6 +118,17 @@ function toggle_status_button(data) {
         ' ' +
         'Đóng / Mở' +
         '</button>');
+}
+
+function test_class_button(data) {
+    return (btn =
+        '<a class="btn btn-warning me-1 ms-1 text-white" href="index.php?action=test_class&test_code=' +
+        data.test_code +
+        '">' +
+        '<i class="uil-diary"></i>' +
+        ' ' +
+        'Phân lớp' +
+        '</a>');
 }
 
 function test_detail_button(data) {
