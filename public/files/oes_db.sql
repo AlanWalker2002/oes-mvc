@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 10, 2022 lúc 01:44 PM
+-- Thời gian đã tạo: Th12 07, 2022 lúc 06:19 PM
 -- Phiên bản máy phục vụ: 10.4.24-MariaDB
 -- Phiên bản PHP: 7.4.29
 
@@ -40,6 +40,14 @@ CREATE TABLE `admins` (
   `birthday` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Đang đổ dữ liệu cho bảng `admins`
+--
+
+INSERT INTO `admins` (`id`, `username`, `email`, `password`, `name`, `permission_id`, `last_login`, `gender_id`, `avatar`, `birthday`) VALUES
+(1, 'admin', 'admin@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Admin', 1, '2022-11-27 00:21:36', 1, 'avatar-default.jpg', '2001-11-13'),
+(2, 'adminư', 'ndateambds3@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'ndateambds1232', 1, '0000-00-00 00:00:00', 3, 'avatar-default.jpg', '2022-11-02');
+
 -- --------------------------------------------------------
 
 --
@@ -51,6 +59,18 @@ CREATE TABLE `classes` (
   `name` varchar(50) NOT NULL,
   `grade_id` int(10) NOT NULL,
   `teacher_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `class_of_test`
+--
+
+CREATE TABLE `class_of_test` (
+  `test_code` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `timest` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -285,6 +305,13 @@ ALTER TABLE `classes`
   ADD KEY `k4` (`grade_id`);
 
 --
+-- Chỉ mục cho bảng `class_of_test`
+--
+ALTER TABLE `class_of_test`
+  ADD PRIMARY KEY (`test_code`,`class_id`),
+  ADD KEY `class_id` (`class_id`);
+
+--
 -- Chỉ mục cho bảng `genders`
 --
 ALTER TABLE `genders`
@@ -382,7 +409,7 @@ ALTER TABLE `tests`
 -- AUTO_INCREMENT cho bảng `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `classes`
@@ -461,6 +488,13 @@ ALTER TABLE `admins`
 ALTER TABLE `classes`
   ADD CONSTRAINT `classes_ibfk_1` FOREIGN KEY (`grade_id`) REFERENCES `grades` (`id`),
   ADD CONSTRAINT `classes_ibfk_2` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`);
+
+--
+-- Các ràng buộc cho bảng `class_of_test`
+--
+ALTER TABLE `class_of_test`
+  ADD CONSTRAINT `class_of_test_ibfk_1` FOREIGN KEY (`test_code`) REFERENCES `tests` (`test_code`),
+  ADD CONSTRAINT `class_of_test_ibfk_2` FOREIGN KEY (`class_id`) REFERENCES `classes` (`id`);
 
 --
 -- Các ràng buộc cho bảng `questions`
